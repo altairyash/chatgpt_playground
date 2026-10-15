@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "AEO Audit Services | AEO Studio",
-  description: "A focused Answer Engine Optimization audit with technical checks, content and entity gaps, public citation research, and a prioritized action plan.",
+  title: "AI Buyer Visibility Sprint | CiteGlance",
+  description: "A buyer-intent AI search visibility study for growth-stage B2B SaaS companies, including competitor presence, citation-source research, and an actionable growth plan.",
   alternates: { canonical: "/services" },
 };
 
@@ -16,26 +16,26 @@ export default function ServicesPage() {
       </nav>
       <article className="shell guide-article">
         <div className="eyebrow">SERVICES · CLEAR SCOPE</div>
-        <h1>A practical AEO audit. <em>No ranking promises.</em></h1>
-        <p className="guide-lede">A focused review of how clearly your brand is represented on your website and across relevant public sources, turned into a prioritized action plan.</p>
+        <h1>Know which software brands AI recommends. <em>And what sources shape the answer.</em></h1>
+        <p className="guide-lede">For B2B SaaS teams where one qualified deal can be worth thousands of dollars. We test buyer-intent questions across selected AI answer platforms, map competitors and cited sources, then deliver a commercially prioritized action plan.</p>
         <section className="guide-section">
-          <h2>Foundations Sprint</h2>
-          <p><strong>₹4,999 one-time pilot price</strong> for one brand and one website. Scope is confirmed before payment.</p>
+          <h2>AI Buyer Visibility Sprint</h2>
+          <p><strong>$1,500 fixed-scope engagement</strong> for one B2B software brand, one primary market, up to 20 buyer-intent prompts, and up to three AI answer platforms, subject to access and reproducibility. Scope is confirmed before payment.</p>
           <div className="guide-checklist">
-            <div className="guide-check"><span className="guide-number">01</span><div><h3>Technical readiness</h3><p>Review metadata, indexing signals, canonical setup, structured-data presence, and discovery files.</p></div></div>
-            <div className="guide-check"><span className="guide-number">02</span><div><h3>Brand and content clarity</h3><p>Find gaps in core company facts, buyer questions, page structure, and supporting evidence.</p></div></div>
-            <div className="guide-check"><span className="guide-number">03</span><div><h3>Public-source research</h3><p>Review relevant public citations and competitor positioning. Any AI-answer tests are labeled with the actual platform and method used.</p></div></div>
-            <div className="guide-check"><span className="guide-number">04</span><div><h3>Prioritized action plan</h3><p>Get a practical 30-day roadmap with effort and impact notes for each recommendation.</p></div></div>
+            <div className="guide-check"><span className="guide-number">01</span><div><h3>Technical readiness</h3><p>Review how the product is described and represented across key buyer-facing pages and discoverability signals.</p></div></div>
+            <div className="guide-check"><span className="guide-number">02</span><div><h3>Brand and content clarity</h3><p>Identify high-intent questions buyers ask when comparing solutions, and where product positioning or proof is missing.</p></div></div>
+            <div className="guide-check"><span className="guide-number">03</span><div><h3>Public-source research</h3><p>Record brand mentions, competitor mentions, answer context, and available source citations across the agreed prompt set. Record platform, date, and method; distinguish observations from assumptions.</p></div></div>
+            <div className="guide-check"><span className="guide-number">04</span><div><h3>Prioritized action plan</h3><p>Get a prioritized 30-day action plan, competitor/source map, prompt-level findings, and recommendations ranked by likely commercial value and implementation effort.</p></div></div>
           </div>
-          <p>The free scanner is only a technical snapshot. The paid audit does not include automatic ongoing monitoring or guarantee that an AI assistant will mention, cite, or recommend your brand.</p>
+          <p>The free scanner is only a technical snapshot and is not the paid deliverable. This sprint is a point-in-time research engagement, not continuous monitoring, and cannot guarantee that any AI assistant will mention, cite, or recommend your brand.</p>
           <Link className="button button-primary" href="/#assessment">Discuss your website ↗</Link>
         </section>
         <section className="guide-section">
-          <h2>After the audit</h2>
-          <p>You can implement the recommendations yourself. Hands-on implementation or ongoing monitoring is separately scoped and quoted. We do not sell fake reviews, spammy placements, or fabricated visibility reports.</p>
+          <h2>Optional implementation</h2>
+          <p>Implementation, repeat measurement, and monthly monitoring can be separately scoped and quoted after the initial study. No fake reviews, paid-for undisclosed mentions, or fabricated visibility data. We do not sell fake reviews, spammy placements, or fabricated visibility reports.</p>
         </section>
       </article>
-      <footer className="footer"><div className="shell footer-inner"><Link className="brand" href="/">AEO<span className="brand-light"> studio</span></Link><span>Useful evidence. Practical improvements. No ranking guarantees.</span><span>© {new Date().getFullYear()} AEO Studio</span></div></footer>
+      <footer className="footer"><div className="shell footer-inner"><Link className="brand" href="/">AEO<span className="brand-light"> studio</span></Link><span>Useful evidence. Practical improvements. No ranking guarantees.</span><span>© {new Date().getFullYear()} CiteGlance</span></div></footer>
     </main>
   );
 }
