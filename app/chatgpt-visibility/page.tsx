@@ -10,7 +10,7 @@ const prompts = [
 ];
 
 export const metadata: Metadata = {
-  title: "How to Check Whether ChatGPT Mentions Your Brand | AEO Studio",
+  title: "How to Check Whether ChatGPT Mentions Your Brand | CiteGlance",
   description: "A practical method to test brand mentions and citations in ChatGPT and other AI answer engines, record competitors, and turn observations into an AEO action plan.",
   alternates: { canonical: "/chatgpt-visibility" },
   openGraph: {
@@ -22,16 +22,12 @@ export const metadata: Metadata = {
 
 export default function ChatGPTVisibilityPage() {
   return (
-    <main>
-      <nav className="nav shell">
-        <Link className="brand" href="/" aria-label="AEO Studio home"><span className="brand-mark">A</span><span>AEO<span className="brand-light"> studio</span></span></Link>
-        <Link className="nav-link" href="/#assessment">Request an assessment <span aria-hidden="true">↗</span></Link>
-      </nav>
-      <article className="shell guide-article">
+    <main className="cg4-inner cg4-article-page cg4-chatgpt-page">
+<article className="shell guide-article">
         <div className="eyebrow">AI VISIBILITY · PRACTICAL PLAYBOOK</div>
         <h1>How to check whether ChatGPT <em>mentions your brand.</em></h1>
         <p className="guide-lede">You do not need a mysterious “AI ranking score” to start. Build a small, repeatable set of buyer questions, record what each answer actually says, and keep the prompt, model, date, and evidence alongside every observation.</p>
-        <p className="guide-updated">A practical measurement framework from AEO Studio · October 2026</p>
+        <p className="guide-updated">A practical measurement framework from CiteGlance · October 2026</p>
 
         <section className="guide-section">
           <h2>1. Start with buyer questions, not vanity prompts</h2>
@@ -82,7 +78,6 @@ export default function ChatGPTVisibilityPage() {
           <p>Want help designing a repeatable prompt set and interpreting evidence? <Link href="/#assessment"><strong>Request an AEO baseline.</strong></Link></p>
         </section>
       </article>
-      <footer className="footer"><div className="shell footer-inner"><Link className="brand" href="/"><span className="brand-mark">A</span><span>AEO<span className="brand-light"> studio</span></span></Link><span>Useful evidence. Practical improvements. No ranking guarantees.</span><span>© {new Date().getFullYear()} AEO Studio</span></div></footer>
-    </main>
+</main>
   );
 }
