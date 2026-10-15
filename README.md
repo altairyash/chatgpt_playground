@@ -8,7 +8,7 @@ A responsive landing page for a practical website search-readiness audit service
 2. Set the production branch to `main` and choose the **Next.js** framework preset.
 3. Keep the default install/build settings (`npm install`, `npm run build`).
 4. In Vercel → Project Settings → Environment Variables, add `NEXT_PUBLIC_CONTACT_EMAIL` with the email address that should receive audit requests.
-5. Deploy. New commits to `main` should automatically trigger production deployments.
+5. Deploy. New commits to `main` automatically trigger production deployments when the Git integration is active. This repository is intended for an inspect → improve → commit → deploy iteration loop.
 
 ## Run locally
 
