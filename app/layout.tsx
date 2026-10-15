@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "AEO Studio — AI Search Visibility & Answer Engine Optimization",
+  title: "CiteGlance — AI Search Visibility & Free Website Tools",
   description:
     "Improve how your brand is understood, mentioned, and cited in AI answers. AEO visibility baselines, citation research, competitor gaps, and practical optimization.",
   metadataBase: new URL("https://www.citeglance.com"),
   alternates: { canonical: "/" },
   openGraph: {
-    title: "AEO Studio — AI Search Visibility",
+    title: "CiteGlance — AI Search Visibility",
     description: "Answer Engine Optimization for brand mentions, citations, competitor visibility, and content improvements. Evidence-led, with no ranking guarantees.",
     type: "website",
     url: "https://www.citeglance.com/",
@@ -21,7 +21,7 @@ const structuredData = {
     {
       "@type": "Organization",
       "@id": "https://www.citeglance.com/#organization",
-      name: "AEO Studio",
+      name: "CiteGlance",
       url: "https://www.citeglance.com/",
       description: "Answer Engine Optimization service focused on AI search visibility measurement, citation research, competitor analysis, and practical website and content improvements.",
     },
