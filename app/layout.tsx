@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Signal Audit — AEO & AI Search Readiness Audit",
+  title: "AEO Studio — AI Search Visibility & Answer Engine Optimization",
   description:
-    "Check your website’s readiness for AI search and answer engines. Review crawlability, metadata, structured data signals, and machine-readable content. Practical findings, no ranking promises.",
+    "Improve how your brand is understood, mentioned, and cited in AI answers. AEO visibility baselines, citation research, competitor gaps, and practical optimization.",
   metadataBase: new URL("https://chatgptplayground.vercel.app"),
   openGraph: {
-    title: "Signal Audit — AEO & AI Search Readiness",
-    description: "AEO readiness checks for crawlability, metadata, structured data signals, and AI-readable content. Practical findings without ranking guarantees.",
+    title: "AEO Studio — AI Search Visibility",
+    description: "Answer Engine Optimization for brand mentions, citations, competitor visibility, and content improvements. Evidence-led, with no ranking guarantees.",
     type: "website",
   },
 };
