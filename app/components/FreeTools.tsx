@@ -81,7 +81,7 @@ export default function FreeTools() {
       description,
       "",
       "## Key pages",
-      ...(urls.length ? urls.map((url) => `- [${url.replace(/^https?:\/\//, "")}](${url})`) : ["- Add important public page URLs in the field above."]),
+      ...(urls.length ? urls.map((url) => { const label = url.replace(/^https?:\/\//, "").replace(/[\[\]()]/g, "_").slice(0, 180); const markdownUrl = url.replace(/\(/g, "%28").replace(/\)/g, "%29"); return "- [" + label + "](" + markdownUrl + ")"; }) : ["- Add valid public HTTP or HTTPS page URLs in the field above."]),
       "",
       "> Keep this file accurate and useful. It is a discovery aid, not a guarantee of AI citations.",
     ].join("\n");
@@ -147,9 +147,11 @@ export default function FreeTools() {
               <p>Choose a simple crawl policy and optionally add selected AI training bot rules. Review carefully before publishing; robots.txt is a request, not access control.</p>
               <label htmlFor="robots-mode">Default crawler access</label>
               <select id="robots-mode" value={robotsMode} onChange={(e) => setRobotsMode(e.target.value)}><option value="open">Allow crawling across the site</option><option value="closed">Block all crawlers across the site</option></select>
+              {robotsMode === "closed" && <p className="free-tools-warning">This blocks all crawlers site-wide, including search and retrieval crawlers. Only use it if that is intentional.</p>}
               <label className="free-tools-checkbox"><input type="checkbox" checked={blockTraining} onChange={(e) => setBlockTraining(e.target.checked)} /> Add rules blocking selected AI training crawlers</label>
               <label htmlFor="sitemap-url">Sitemap URL (optional)</label>
               <input id="sitemap-url" type="url" value={sitemap} onChange={(e) => setSitemap(e.target.value)} placeholder="https://example.com/sitemap.xml" />
+              {sitemap.trim() && !normalizedSitemap && <p className="free-tools-warning">Use a public HTTP or HTTPS sitemap URL. The invalid value is omitted from the output.</p>}
               <p className="free-tools-warning">Important: blocking crawlers may reduce discovery. Training crawlers and search/retrieval crawlers can be different; this preset does not block every AI-related bot.</p>
             </>}
             {active === "llms" && <>
@@ -158,15 +160,18 @@ export default function FreeTools() {
               <label htmlFor="llms-name">Website or brand name</label><input id="llms-name" value={siteName} onChange={(e) => setSiteName(e.target.value)} placeholder="Acme Software" />
               <label htmlFor="llms-description">Short, factual description</label><textarea id="llms-description" value={siteDescription} onChange={(e) => setSiteDescription(e.target.value)} placeholder="What does the company do, and who is it for?" rows={3} />
               <label htmlFor="llms-urls">Important public URLs (one per line)</label><textarea id="llms-urls" value={pageUrls} onChange={(e) => setPageUrls(e.target.value)} placeholder={"https://example.com/product\nhttps://example.com/pricing\nhttps://example.com/docs"} rows={6} />
+              {invalidPageUrlCount > 0 && <p className="free-tools-warning">{invalidPageUrlCount} invalid URL(s) are omitted. Enter complete public HTTP or HTTPS URLs.</p>}
               <p className="free-tools-warning">Check every URL and statement before publishing. llms.txt is an emerging convention, not a ranking factor guarantee.</p>
             </>}
             {active === "meta" && <>
               <h2>Generate social metadata</h2>
               <p>Prepare basic HTML and Open Graph tags for link previews. Use a public, absolute URL for the canonical page and preview image.</p>
               <label htmlFor="meta-url">Canonical page URL</label><input id="meta-url" type="url" value={siteUrl} onChange={(e) => setSiteUrl(e.target.value)} placeholder="https://example.com/page" />
+              {siteUrl.trim() && !normalizedSiteUrl && <p className="free-tools-warning">Enter a valid public HTTP or HTTPS page URL to generate canonical tags.</p>}
               <label htmlFor="meta-title">Page title</label><input id="meta-title" value={pageTitle} onChange={(e) => setPageTitle(e.target.value)} placeholder="A clear, specific page title" />
               <label htmlFor="meta-description">Description</label><textarea id="meta-description" value={pageDescription} onChange={(e) => setPageDescription(e.target.value)} placeholder="Summarize the page accurately." rows={3} />
               <label htmlFor="meta-image">Social preview image URL (optional)</label><input id="meta-image" type="url" value={ogImage} onChange={(e) => setOgImage(e.target.value)} placeholder="https://example.com/social-card.png" />
+              {ogImage.trim() && !normalizedOgImage && <p className="free-tools-warning">Use a public HTTP or HTTPS image URL. The invalid value is omitted.</p>}
               <label htmlFor="meta-type">Page type</label><select id="meta-type" value={pageType} onChange={(e) => setPageType(e.target.value)}><option value="website">Website</option><option value="article">Article</option><option value="product">Product</option></select>
             </>}
           </div>
