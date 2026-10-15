@@ -5,7 +5,6 @@ import Link from "next/link";
 import { TabsRoot, TabsList, TabsTrigger, TabsContent } from "./ui/Tabs";
 
 type ToolTab = "robots" | "llms" | "meta";
-const toolTabs: ToolTab[] = ["robots", "llms", "meta"];
 
 function normalizeHttpUrl(raw: string): string | null {
   try {
@@ -133,7 +132,7 @@ export default function FreeTools() {
   return (
     <main className="cg4-inner cg4-free-tools-page">
       <div className="shell">
-<header className="free-tools-hero">
+        <header className="free-tools-hero">
         <div className="eyebrow">FREE · NO ACCOUNT REQUIRED</div>
         <h1>Small tools for a more <em>discoverable website.</em></h1>
         <p>Generate useful website files and metadata in your browser. No account, no paywall, and no claim that a generated file alone will make an AI assistant cite you.</p>
@@ -191,7 +190,8 @@ export default function FreeTools() {
               <button type="button" onClick={() => downloadText(active === "robots" ? "robots.txt" : active === "llms" ? "llms.txt" : "meta-tags.html", output, active === "meta" ? "text/html" : "text/plain")}>Download file</button>
             </div>
             {copied && <p className="free-tools-copied" role="status">{copied}</p>}
-            </div>
+          </div>
+          </div>
           </TabsContent>
         </TabsRoot>
       </section>
