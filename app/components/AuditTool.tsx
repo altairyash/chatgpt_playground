@@ -3,7 +3,14 @@
 import { FormEvent, useState } from "react";
 
 type Check = { label: string; status: "pass" | "review"; detail: string };
-type Result = { url: string; checkedAt: string; score: number; checks: Check[]; note: string };
+type AiPriority = { priority: "first" | "next" | "later"; title: string; finding: string; action: string };
+type AiReview = {
+  status: "ready" | "not_configured" | "unavailable";
+  summary: string;
+  priorities: AiPriority[];
+  caveat: string;
+};
+type Result = { url: string; checkedAt: string; score: number; checks: Check[]; note: string; aiReview?: AiReview };
 
 export default function AuditTool() {
   const [url, setUrl] = useState("");
@@ -52,7 +59,7 @@ export default function AuditTool() {
           </form>
           {error && <p className="audit-error" role="alert">{error}</p>}
           {result && (
-            <div className="audit-results" aria-live="polite">
+            <div className="audit-results" id="audit-report" aria-live="polite">
               <div className="audit-result-head">
                 <div><span className="audit-result-kicker">AEO READINESS SNAPSHOT</span><strong>{new URL(result.url).hostname}</strong></div>
                 <div className="audit-score"><b>{result.score}</b><span>/ 100 signals</span></div>
@@ -65,6 +72,42 @@ export default function AuditTool() {
                   </div>
                 ))}
               </div>
+              {result.aiReview && (
+                <section className="audit-ai-review" aria-label="AI recommendations">
+                  <div className="audit-ai-head">
+                    <div>
+                      <span className="audit-result-kicker">AI NEXT STEPS</span>
+                      <h3>What to fix first</h3>
+                    </div>
+                    <span className={"audit-ai-status audit-ai-" + result.aiReview.status}>
+                      {result.aiReview.status === "ready"
+                        ? "PERSONALIZED REVIEW"
+                        : result.aiReview.status === "not_configured"
+                          ? "AI NOT CONNECTED"
+                          : "REVIEW UNAVAILABLE"}
+                    </span>
+                  </div>
+                  <p className="audit-ai-summary">{result.aiReview.summary}</p>
+                  {result.aiReview.priorities.length > 0 && (
+                    <ol className="audit-ai-priorities">
+                      {result.aiReview.priorities.map((priority, index) => (
+                        <li key={priority.title + index}>
+                          <div className="audit-ai-priority-top">
+                            <span className="audit-ai-number">{String(index + 1).padStart(2, "0")}</span>
+                            <span className={"audit-ai-priority-label priority-" + priority.priority}>
+                              {priority.priority === "first" ? "DO FIRST" : priority.priority === "later" ? "LATER" : "NEXT"}
+                            </span>
+                          </div>
+                          <h4>{priority.title}</h4>
+                          <p>{priority.finding}</p>
+                          <p className="audit-ai-action"><strong>Suggested action:</strong> {priority.action}</p>
+                        </li>
+                      ))}
+                    </ol>
+                  )}
+                  <p className="audit-ai-caveat">{result.aiReview.caveat}</p>
+                </section>
+              )}
               <p className="audit-result-note">{result.note}</p>
               <div className="audit-result-actions"><button type="button" className="audit-download-button" onClick={() => window.print()}>Save report as PDF ↗</button><a className="audit-upgrade-link" href={`#assessment`} onClick={() => setUrl(result.url)}>Need help prioritizing AEO improvements? Request a review ↓</a></div>
             </div>
