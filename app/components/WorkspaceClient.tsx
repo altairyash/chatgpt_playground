@@ -487,6 +487,10 @@ export default function WorkspaceClient() {
                     <strong>{prompt ? prompt.text : "Prompt removed"}</strong>
                     <p>{item.answer.length > 250 ? item.answer.slice(0, 250) + "…" : item.answer}</p>
                     <small>{sourceUrls(item.citations).length} valid source link(s)</small>
+                    {sourceUrls(item.citations).length > 0 && <div className="cg-work-citation-list" aria-label="Cited sources">
+                      {sourceUrls(item.citations).slice(0, 3).map(function (url) { return <a key={url} href={url} target="_blank" rel="noopener noreferrer">{new URL(url).hostname.replace(/^www\./, "")}<span aria-hidden="true">↗</span></a>; })}
+                      {sourceUrls(item.citations).length > 3 && <span className="cg-work-citation-more">+{sourceUrls(item.citations).length - 3} more</span>}
+                    </div>}
                   </article>;
                 }) : <div className="cg-work-empty"><p>Saved answers will appear here after you record your first observation.</p></div>}
               </section>
@@ -508,6 +512,10 @@ export default function WorkspaceClient() {
                   <strong>{evidenceForContent.platform} · {niceDate(evidenceForContent.recordedAt)}</strong>
                   <p>{evidenceForContent.answer.slice(0, 500)}{evidenceForContent.answer.length > 500 ? "…" : ""}</p>
                   <span>{citationsForEvidence.length} valid source URLs captured</span>
+                  {citationsForEvidence.length > 0 && <div className="cg-work-citation-list" aria-label="Evidence sources">
+                    {citationsForEvidence.slice(0, 4).map(function (url) { return <a key={url} href={url} target="_blank" rel="noopener noreferrer">{new URL(url).hostname.replace(/^www\./, "")}<span aria-hidden="true">↗</span></a>; })}
+                    {citationsForEvidence.length > 4 && <span className="cg-work-citation-more">+{citationsForEvidence.length - 4} more</span>}
+                  </div>}
                 </> : <p>Record an actual answer for a prompt before creating evidence-linked content.</p>}
               </div>
               <button type="button" className="cg-work-button cg-work-button-dark cg-work-generate" onClick={generateContent} disabled={contentBusy || !evidenceForContent}>
