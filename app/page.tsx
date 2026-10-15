@@ -30,7 +30,7 @@ export default function Home() {
       setSent(true);
       return;
     }
-    const subject = encodeURIComponent("AEO Studio — AI visibility baseline");
+    const subject = encodeURIComponent("CiteGlance — AI buyer visibility sprint");
     const body = encodeURIComponent(
       `New AEO assessment request\n\nWebsite: ${website}\nCompany: ${company || "Not provided"}\nContact: ${email}\nGoal: ${goal}\n\nPlease follow up to scope the initial assessment.`
     );
@@ -41,7 +41,7 @@ export default function Home() {
   return (
     <main>
       <nav className="nav shell aeonav">
-        <a className="brand" href="#top" aria-label="AEO Studio home"><span className="brand-mark">A</span><span>AEO<span className="brand-light"> studio</span></span></a>
+        <a className="brand" href="#top" aria-label="CiteGlance home"><span className="brand-mark">A</span><span>AEO<span className="brand-light"> studio</span></span></a>
         <div className="aeonav-links"><a className="nav-link" href="#method">Method</a><a className="nav-link" href="/services">Services</a><a className="nav-link" href="/chatgpt-visibility">Guides</a><a className="button button-primary" href="#assessment">Get assessed <span aria-hidden="true">↗</span></a></div>
       </nav>
 
@@ -49,7 +49,7 @@ export default function Home() {
         <div className="aeo-hero-copy">
           <div className="eyebrow"><span className="pulse" /> ANSWER ENGINE OPTIMIZATION</div>
           <h1>When customers ask AI who to choose, <em>be in the conversation.</em></h1>
-          <p className="aeo-lede">AEO Studio helps brands improve how they are understood, mentioned, and cited across AI answer experiences. We combine visibility measurement, citation research, and practical content improvements—without pretending anyone can guarantee an AI recommendation.</p>
+          <p className="aeo-lede">CiteGlance helps growth-stage B2B software companies understand whether AI tools surface their product when buyers compare solutions. Get a buyer-prompt visibility study, competitor and citation-source analysis, and a prioritized growth plan—without made-up scores or ranking promises.</p>
           <div className="hero-actions"><a className="button button-primary" href="#assessment">Get an AI visibility baseline <span aria-hidden="true">↗</span></a><a className="text-link" href="#method">See how it works <span aria-hidden="true">↓</span></a></div>
           <div className="trust-row"><span><span className="check">✓</span> Evidence before edits</span><span><span className="check">✓</span> Built around buyer prompts</span><span><span className="check">✓</span> No ranking guarantees</span></div>
         </div>
@@ -79,14 +79,14 @@ export default function Home() {
       <AuditTool />
 
       <section className="request-section shell" id="assessment">
-        <div className="request-copy"><div className="eyebrow">START WITH YOUR BRAND</div><h2>Find your biggest<br /><em>AI visibility gaps.</em></h2><p>Tell us your website and the outcome you want. The first step is a scoped baseline and a clear explanation of what can—and cannot—be measured for your category.</p><div className="price-note"><span className="price-dot" /><span><strong>Foundations Sprint · ₹4,999 one-time pilot</strong><small>One brand, one website, prioritized 30-day action plan</small></span></div></div>
+        <div className="request-copy"><div className="eyebrow">START WITH YOUR BRAND</div><h2>Find your biggest<br /><em>AI visibility gaps.</em></h2><p>Built for B2B SaaS teams with meaningful contract values and active growth budgets. We test buyer-intent prompts, record which brands and sources appear, compare competitors, and translate the findings into specific actions. Platform access and test method are documented.</p><div className="price-note"><span className="price-dot" /><span><strong>AI Buyer Visibility Sprint · $1,500 fixed-scope</strong><small>20 buyer prompts · 3 AI platforms · competitor and source analysis · 30-day plan</small></span></div></div>
         <form className="request-form" onSubmit={submitLead}>
-          <div className="form-top"><span className="form-icon">↗</span><div><strong>Request an AI visibility assessment</strong><small>Tell us what you want to improve</small></div></div>
+          <div className="form-top"><span className="form-icon">↗</span><div><strong>Request an AI buyer visibility sprint</strong><small>For B2B software teams evaluating AI-driven discovery</small></div></div>
           <label htmlFor="site-url">Website URL</label><input id="site-url" type="url" placeholder="https://yourbrand.com" value={website} onChange={(e) => setWebsite(e.target.value)} required />
           <label htmlFor="company-name">Brand or company <span className="aeo-optional">(optional)</span></label><input id="company-name" type="text" placeholder="Your company" value={company} onChange={(e) => setCompany(e.target.value)} />
           <label htmlFor="contact-email">Work email</label><input id="contact-email" type="email" placeholder="you@company.com" value={email} onChange={(e) => setEmail(e.target.value)} required />
           <label htmlFor="goal">Main goal</label><select id="goal" value={goal} onChange={(e) => setGoal(e.target.value)}><option>Appear in AI recommendations</option><option>Earn more citations</option><option>Understand competitors</option><option>Improve AI-driven leads</option></select>
-          <button className="button button-primary submit-button" type="submit">Request my baseline <span aria-hidden="true">↗</span></button>
+          <button className="button button-primary submit-button" type="submit">Request a scoped proposal <span aria-hidden="true">↗</span></button>
           {sent && !process.env.NEXT_PUBLIC_CONTACT_EMAIL && <p className="form-message" role="status">The request is filled in, but the contact inbox is not configured. Please contact the site owner to finish setup.</p>}
           {sent && process.env.NEXT_PUBLIC_CONTACT_EMAIL && <p className="form-message" role="status">Your email app should open with the request prepared. Send it to complete the request.</p>}
           <p className="form-privacy">No payment is taken here. We confirm the scope before starting work.</p>
