@@ -66,7 +66,7 @@ export default function AuditTool() {
                 ))}
               </div>
               <p className="audit-result-note">{result.note}</p>
-              <a className="audit-upgrade-link" href={`#request`} onClick={() => setUrl(result.url)}>Want a deeper, prioritized review? Request a paid audit ↓</a>
+              <div className="audit-result-actions"><button type="button" className="audit-download-button" onClick={() => window.print()}>Save report as PDF ↗</button><a className="audit-upgrade-link" href={`#request`} onClick={() => setUrl(result.url)}>Want a deeper, prioritized review? Request a paid audit ↓</a></div>
             </div>
           )}
         </div>
