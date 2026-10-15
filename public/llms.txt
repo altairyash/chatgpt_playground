@@ -16,6 +16,7 @@
 ## Guides
 - AEO guide: https://chatgptplayground.vercel.app/aeo-guide
 - How to check whether ChatGPT mentions your brand: https://chatgptplayground.vercel.app/chatgpt-visibility
+- Services: https://chatgptplayground.vercel.app/services
 
 ## Website
 - Homepage: https://chatgptplayground.vercel.app/
