@@ -43,12 +43,8 @@ const tiers = [
 
 export default function PricingPage() {
   return (
-    <main>
-      <nav className="nav shell free-tools-nav">
-        <Link className="brand" href="/"><span className="brand-mark">C</span><span>Cite<span className="brand-light">Glance</span></span></Link>
-        <div className="aeonav-links"><Link className="nav-link" href="/free-tools">Free tools</Link><Link className="nav-link" href="/services">Services</Link><Link className="button button-primary" href="/#assessment">Get assessed <span aria-hidden="true">↗</span></Link></div>
-      </nav>
-      <header className="shell pricing-hero">
+    <main className="cg4-inner cg4-pricing-page">
+<header className="shell pricing-hero">
         <div className="eyebrow">STRAIGHTFORWARD PRICING</div>
         <h1>Start free.<br/><em>Pay for evidence when you need it.</em></h1>
         <p>Use the utilities without an account. If you need actual AI answer research, start with a small pilot before committing to a larger sprint. We only report what was observed and what could be verified.</p>
@@ -70,7 +66,6 @@ export default function PricingPage() {
         <p>AI answers vary by prompt, location, model, and time. We do not guarantee rankings, brand mentions, citations, leads, or revenue. Before any paid snapshot or sprint begins, we confirm the available platforms, exact scope, evidence format, and delivery date.</p>
         <p>The $99 snapshot is an early-access pilot offer. Its scope is deliberately narrow; it is not a recurring tracking subscription or a substitute for the full sprint.</p>
       </section>
-      <footer className="footer"><div className="shell footer-inner"><Link className="brand" href="/"><span className="brand-mark">C</span><span>Cite<span className="brand-light">Glance</span></span></Link><span><Link href="/free-tools">Free tools</Link> · <Link href="/services">Services</Link></span><span>Evidence before promises.</span><span>© {new Date().getFullYear()} CiteGlance</span></div></footer>
-    </main>
+</main>
   );
 }
