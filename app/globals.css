@@ -1313,3 +1313,259 @@ body { background: #f7f6f1; color: #191b19; }
   .audit-ai-priorities li { border-color: #ddd; }
   .audit-ai-summary, .audit-ai-priorities li > p, .audit-ai-caveat { color: #333 !important; }
 }
+
+
+
+/* Align Free Tools to the same centered content column used by Pricing and Services.
+   The main route is full-width; the inner .shell owns the consistent page gutters. */
+html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+.cg4-free-tools-page {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+}
+.cg4-free-tools-page > .shell {
+  width: min(1160px, calc(100% - 96px));
+  max-width: 1160px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.cg4-free-tools-page .free-tools-hero { max-width: 850px; }
+.cg4-free-tools-page .free-tools-workbench,
+.cg4-free-tools-page .free-tools-next { width: 100%; }
+.cg4-free-tools-page .free-tools-hero h1 { color: #191b19; }
+.cg4-free-tools-page .free-tools-hero > p { color: #676d65; }
+.cg4-free-tools-page .free-tools-tabs button:focus-visible {
+  position: relative;
+  z-index: 1;
+  outline: 3px solid #8990ff;
+  outline-offset: -4px;
+}
+.cg4-free-tools-page .free-tools-columns:focus-visible {
+  outline: 2px solid #8990ff;
+  outline-offset: 3px;
+}
+.cg4-free-tools-page .free-tools-output pre {
+  max-width: 100%;
+  overflow: auto;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+.cg4-free-tools-page .free-tools-output-actions button:disabled { opacity: .5; cursor: not-allowed; }
+
+/* Honest scan feedback: indeterminate while the request is in flight, factual once done. */
+.audit-progress {
+  display: grid;
+  gap: 10px;
+  margin-top: 20px;
+  padding: 16px;
+  border: 1px solid #dedff0;
+  border-radius: 6px;
+  background: #f7f7ff;
+  color: #252822;
+}
+.audit-progress > strong { font-size: 12px; font-weight: 700; }
+.audit-progress > p { margin: 0; color: #666c64; font-size: 10px; line-height: 1.7; }
+.audit-progress-track {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  width: 100%;
+  height: 4px;
+  border-radius: 999px;
+  background: #e3e5f7;
+}
+.audit-progress-track > span {
+  display: block;
+  width: 38%;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--cg3-blue);
+  animation: cg4-scan-indeterminate 1.35s ease-in-out infinite alternate;
+}
+@keyframes cg4-scan-indeterminate {
+  from { transform: translateX(-20%); }
+  to { transform: translateX(190%); }
+}
+.audit-result-overview {
+  margin: 1px 0 17px;
+  padding: 13px 0 16px;
+  border-bottom: 1px solid #eef0e9;
+}
+.audit-result-counts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px 16px;
+  color: #6c736b;
+  font-size: 10px;
+  line-height: 1.6;
+}
+.audit-result-counts span { display: inline-flex; align-items: baseline; gap: 4px; }
+.audit-result-counts strong { color: #2c3129; font-size: 11px; }
+.audit-result-meter {
+  height: 5px;
+  margin-top: 12px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #e9ebe5;
+}
+.audit-result-meter > span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--cg3-blue);
+  transition: width .45s cubic-bezier(.2,.7,.2,1);
+}
+.audit-result-overview > p {
+  margin: 8px 0 0;
+  color: #858b81;
+  font-size: 9px;
+  line-height: 1.65;
+}
+
+/* The action plan is useful before sign-up and becomes more personal as visitors use it. */
+.audit-action-plan {
+  margin-top: 20px;
+  padding: 17px;
+  border: 1px solid #dedff0;
+  border-radius: 7px;
+  background: #fbfbff;
+  color: #252822;
+}
+.audit-action-plan-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+.audit-action-plan-head h3 {
+  margin: 5px 0 0;
+  color: #252822;
+  font: 500 24px/1.15 "Iowan Old Style", Georgia, serif;
+  letter-spacing: -.45px;
+}
+.audit-action-count {
+  flex: 0 0 auto;
+  padding: 6px 8px;
+  border: 1px solid #d9dbee;
+  border-radius: 3px;
+  background: #f0f1ff;
+  color: #5059bf;
+  font: 9px "DM Mono", monospace;
+}
+.audit-action-intro {
+  margin: 11px 0 0;
+  color: #686e66;
+  font-size: 10px;
+  line-height: 1.75;
+}
+.audit-action-progress {
+  height: 5px;
+  margin-top: 14px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #e8e9f5;
+}
+.audit-action-progress > span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: #4d5cf5;
+  transition: width .35s cubic-bezier(.2,.7,.2,1);
+}
+.audit-action-list {
+  display: grid;
+  gap: 0;
+  margin-top: 13px;
+  border-top: 1px solid #e6e7f1;
+}
+.audit-action-item {
+  display: grid;
+  grid-template-columns: 17px minmax(0, 1fr);
+  align-items: start;
+  gap: 10px;
+  padding: 13px 0;
+  border-bottom: 1px solid #e6e7f1;
+  cursor: pointer;
+}
+.audit-action-item > input {
+  width: 15px;
+  height: 15px;
+  margin: 3px 0 0;
+  accent-color: var(--cg3-blue);
+  cursor: pointer;
+}
+.audit-action-content { display: grid; gap: 5px; min-width: 0; }
+.audit-action-priority {
+  color: #5059c7;
+  font: 8px "DM Mono", monospace;
+  letter-spacing: .8px;
+}
+.audit-action-item strong { color: #282d25; font-size: 11px; line-height: 1.5; }
+.audit-action-finding, .audit-action-fix {
+  color: #6c7269;
+  font-size: 10px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+.audit-action-fix b { color: #3e46b2; font-weight: 700; }
+.audit-action-item.is-done .audit-action-content > strong {
+  color: #777d74;
+  text-decoration: line-through;
+  text-decoration-thickness: 1px;
+}
+.audit-action-item.is-done .audit-action-priority { color: #68746b; }
+.audit-action-plan-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 15px;
+}
+.audit-action-plan-actions button { min-height: 38px; }
+.audit-copy-plan-button {
+  border: 1px solid #d9dbee;
+  border-radius: 5px;
+  padding: 0 12px;
+  background: #fff;
+  color: #444bb0;
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .18s ease, border-color .18s ease;
+}
+.audit-copy-plan-button:hover { background: #f0f1ff; border-color: #aeb3f7; }
+.audit-action-message {
+  margin: 10px 0 0;
+  color: #4d568e;
+  font-size: 10px;
+  line-height: 1.6;
+}
+.audit-ai-caveat { overflow-wrap: anywhere; }
+.audit-result-actions .audit-upgrade-link { line-height: 1.7; }
+.audit-download-button:focus-visible, .audit-copy-plan-button:focus-visible {
+  outline: 3px solid #8990ff;
+  outline-offset: 3px;
+}
+@media (max-width: 820px) {
+  .cg4-free-tools-page > .shell { width: calc(100% - 56px); }
+}
+@media (max-width: 600px) {
+  .cg4-free-tools-page > .shell { width: calc(100% - 36px); }
+  .audit-action-plan { padding: 14px; }
+  .audit-action-plan-head { flex-direction: column; }
+  .audit-result-counts { gap: 6px 11px; }
+  .audit-result-counts span:last-child { width: 100%; }
+}
+@media print {
+  html { scroll-behavior: auto; }
+  .audit-action-plan-actions, .audit-action-message { display: none !important; }
+  .audit-action-plan { background: #fff !important; border-color: #bbb !important; }
+  .audit-action-item { border-color: #ddd !important; }
+  .audit-action-finding, .audit-action-fix, .audit-action-intro, .audit-result-overview > p { color: #333 !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .audit-progress-track > span { animation: none !important; width: 100%; }
+  .audit-result-meter > span, .audit-action-progress > span { transition: none !important; }
+}
