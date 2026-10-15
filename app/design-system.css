@@ -544,3 +544,150 @@ button, input, textarea, select { font-family: inherit; }
   html { scroll-behavior: auto; }
   .cg21-tabs-trigger, .cg3-button, .button, .cg-work-button { transition: none !important; }
 }
+
+
+/* Align every homepage section to the same grid and typographic scale. */
+.cg3-method, .cg3-offers, .cg3-request, .cg3-faq {
+  width: min(var(--cg-container), calc(100% - 48px));
+  margin-inline: auto;
+}
+.cg3-method { padding-block: clamp(64px, 8vw, 104px); gap: clamp(32px, 6vw, 80px); }
+.cg3-offers { padding-block: clamp(64px, 8vw, 100px); }
+.cg3-request { padding-block: clamp(64px, 8vw, 100px); gap: clamp(32px, 6vw, 80px); }
+.cg3-faq { padding-bottom: clamp(56px, 7vw, 84px); gap: clamp(28px, 5vw, 60px); }
+.cg3-capabilities {
+  padding-inline: max(24px, calc((100% - var(--cg-container)) / 2));
+  background: #f0effa;
+  border-color: var(--cg-line);
+}
+.cg3-principle, .cg3-free-check {
+  padding-inline: max(24px, calc((100% - var(--cg-container)) / 2));
+  border-color: #e4e0fb;
+  background: #f0effa;
+}
+.cg3-principle-mark { color: var(--cg-primary); }
+.cg3-principle h2 {
+  font-family: var(--cg-font);
+  font-weight: 700;
+  letter-spacing: -.045em;
+}
+.cg3-section-intro h2, .cg3-offers-heading h2, .cg3-free-copy h2,
+.cg3-request-copy h2, .cg3-faq-heading h2 {
+  margin: 18px 0;
+  font-family: var(--cg-font);
+  font-size: clamp(30px, 3.7vw, 46px);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -.055em;
+}
+.cg3-section-intro h2 em, .cg3-offers-heading h2 em, .cg3-free-copy h2 em,
+.cg3-request-copy h2 em, .cg3-faq-heading h2 em { color: var(--cg-primary); }
+.cg3-section-intro > p, .cg3-offers-heading > p, .cg3-free-copy > p, .cg3-request-copy > p {
+  color: var(--cg-muted);
+  font-size: 14px;
+  line-height: 1.8;
+}
+.cg3-work-item { border-color: var(--cg-line); }
+.cg3-work-item h3, .cg3-offer-card h3 {
+  font-family: var(--cg-font);
+  font-weight: 700;
+  letter-spacing: -.035em;
+}
+.cg3-offer-grid { gap: 20px; }
+.cg3-offer-card {
+  padding: clamp(22px, 3vw, 30px);
+  border: 1px solid var(--cg-line);
+  border-radius: var(--cg-radius-lg);
+  background: #fff;
+  box-shadow: var(--cg-shadow-sm);
+}
+.cg3-offer-pilot { border-color: #dcd7ff; background: linear-gradient(180deg, #fff, #fcfbff); }
+.cg3-offer-sprint {
+  border-color: #292544;
+  background: linear-gradient(145deg, #292544, #211e3b);
+  color: #fff;
+}
+.cg3-offer-card h3 { margin-top: 22px; font-size: 22px; line-height: 1.25; }
+.cg3-offer-description { min-height: 0; margin-bottom: 4px; color: var(--cg-muted); font-size: 13px; }
+.cg3-offer-card .cg3-price {
+  margin: 20px 0;
+  padding-bottom: 18px;
+  border-color: var(--cg-line);
+  font-family: var(--cg-font);
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: -.055em;
+}
+.cg3-offer-card .cg3-price span { color: var(--cg-muted); font-family: var(--cg-font); font-size: 11px; font-weight: 500; letter-spacing: 0; }
+.cg3-offer-sprint .cg3-price { border-color: rgba(255,255,255,.16); }
+.cg3-offer-sprint .cg3-price span { color: #c4c1d8; }
+.cg3-offer-card ul { gap: 12px; margin-bottom: 24px; }
+.cg3-offer-card li { color: #50546a; font-size: 13px; line-height: 1.55; }
+.cg3-offer-sprint li { color: #e2e0f0; }
+.cg3-offer-badge { border-radius: 999px; padding: 6px 9px; border-color: var(--cg-line-strong); background: #fff; font-size: 9px; }
+.cg3-offer-sprint .cg3-offer-badge { border-color: rgba(255,255,255,.22); background: rgba(255,255,255,.08); color: #dcd8ff; }
+.cg3-scope-note { color: var(--cg-muted); line-height: 1.75; }
+.cg3-free-check .free-audit-panel {
+  padding: clamp(18px, 2.5vw, 26px);
+  border: 1px solid var(--cg-line);
+  border-radius: var(--cg-radius-lg);
+  background: #fff;
+  box-shadow: var(--cg-shadow-md);
+}
+.cg3-free-check .free-audit-input-row input {
+  min-height: 46px;
+  height: auto;
+  border: 1px solid var(--cg-line-strong);
+  border-radius: var(--cg-radius-sm);
+  padding-inline: 12px;
+  font-size: 13px;
+}
+.cg3-free-check .free-audit-input-row button {
+  min-height: 46px;
+  border-radius: 999px;
+  padding-inline: 16px;
+  background: var(--cg-primary);
+  font-size: 12px;
+}
+.cg3-free-check .free-audit-input-row button:hover { background: var(--cg-primary-hover); }
+.cg3-form {
+  padding: clamp(20px, 3vw, 30px);
+  border: 1px solid var(--cg-line);
+  border-radius: var(--cg-radius-lg);
+  background: #fff;
+  box-shadow: var(--cg-shadow-sm);
+}
+.cg3-form-top { border-color: var(--cg-line); }
+.cg3-form-mark { width: 32px; height: 32px; border-radius: 10px; background: var(--cg-primary); }
+.cg3-form label { margin: 16px 0 7px; color: #41445a; font-size: 12px; }
+.cg3-form input, .cg3-form select, .cg3-form textarea {
+  min-height: 44px;
+  border: 1px solid var(--cg-line-strong);
+  border-radius: var(--cg-radius-sm);
+  background: #fcfcff;
+  color: var(--cg-ink);
+  padding: 10px 12px;
+  font-size: 13px;
+}
+.cg3-form input:focus, .cg3-form select:focus, .cg3-form textarea:focus {
+  outline: none;
+  border-color: #9b90f5;
+  box-shadow: 0 0 0 4px rgba(103,87,232,.10);
+}
+.cg3-form-message { border: 1px solid #e5e1ff; border-radius: var(--cg-radius-sm); background: #f5f3ff; color: #5144b2; font-size: 12px; }
+.cg3-form-note { color: var(--cg-muted); font-size: 11px; }
+.cg3-faq-list { border-color: var(--cg-line); }
+.cg3-faq-list details { border-color: var(--cg-line); padding-block: 19px; }
+.cg3-faq-list summary { font-size: 13px; line-height: 1.55; }
+.cg3-faq-list summary:after { color: var(--cg-primary); }
+.cg3-faq-list details p { color: var(--cg-muted); font-size: 13px; line-height: 1.75; }
+@media (max-width: 760px) {
+  .cg3-method, .cg3-offers, .cg3-request, .cg3-faq { width: calc(100% - 32px); }
+  .cg3-principle, .cg3-free-check { padding-inline: 16px; }
+  .cg3-offer-grid { grid-template-columns: minmax(0,1fr); }
+  .cg3-offer-card { padding: 22px; }
+  .cg3-section-intro h2, .cg3-offers-heading h2, .cg3-free-copy h2,
+  .cg3-request-copy h2, .cg3-faq-heading h2 { font-size: 34px; }
+  .cg3-free-check .free-audit-input-row { flex-direction: column; }
+  .cg3-free-check .free-audit-input-row button { width: 100%; }
+}
