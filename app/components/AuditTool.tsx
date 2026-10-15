@@ -37,7 +37,7 @@ export default function AuditTool() {
       <div className="shell free-audit-grid">
         <div className="free-audit-copy">
           <div className="eyebrow">FREE AEO READINESS CHECK</div>
-          <h2>Check your site's<br /><em>AI search readiness.</em></h2>
+          <h2>Check your site&apos;s<br /><em>AI search readiness.</em></h2>
           <p>Check technical signals that may help answer engines discover and interpret your site. This is a readiness snapshot, not a live ranking test.</p>
           <div className="free-audit-points"><span>✓ No account required</span><span>✓ No payment required</span><span>✓ Results in seconds</span></div>
         </div>
