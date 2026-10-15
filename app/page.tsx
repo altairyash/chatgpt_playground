@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import AuditTool from "./components/AuditTool";
 
 const checks = [
   { number: "01", title: "Can search engines read it?", detail: "Indexability signals, robots directives, canonical URLs, and crawl paths." },
@@ -102,6 +103,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <AuditTool />
 
       <section className="request-section shell" id="request">
         <div className="request-copy"><div className="eyebrow">START WITH YOUR URL</div><h2>Let’s make your site<br /><em>easier to understand.</em></h2><p>Share the site you want reviewed. We’ll use that to scope a sensible first pass — no guaranteed rankings, no mystery metrics.</p><div className="price-note"><span className="price-dot" /><span><strong>Starter audit: ₹4,999</strong><small>Proposed starting price · final scope confirmed before payment</small></span></div></div>
