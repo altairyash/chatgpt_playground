@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import SiteNav from "./components/SiteNav";
+import SiteFooter from "./components/SiteFooter";
+import MotionEnhancer from "./components/MotionEnhancer";
 
 export const metadata: Metadata = {
   title: "CiteGlance — AI Search Visibility & Free Website Tools",
@@ -28,7 +31,7 @@ const structuredData = {
     {
       "@type": "WebSite",
       "@id": "https://www.citeglance.com/#website",
-      name: "AEO Studio",
+      name: "CiteGlance",
       url: "https://www.citeglance.com/",
       publisher: { "@id": "https://www.citeglance.com/#organization" },
       inLanguage: "en",
@@ -51,7 +54,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <SiteNav />
+        <MotionEnhancer />
         {children}
+        <SiteFooter />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
