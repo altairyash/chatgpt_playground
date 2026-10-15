@@ -9,12 +9,8 @@ export const metadata: Metadata = {
 
 export default function ServicesPage() {
   return (
-    <main>
-      <nav className="nav shell">
-        <Link className="brand" href="/">Cite<span className="brand-light">Glance</span></Link>
-        <Link className="nav-link" href="/#assessment">Request an assessment ↗</Link>
-      </nav>
-      <article className="shell guide-article">
+    <main className="cg4-inner cg4-article-page cg4-service-page">
+<article className="shell guide-article">
         <div className="eyebrow">SERVICES · CLEAR SCOPE</div>
         <h1>Know which software brands AI recommends. <em>And what sources shape the answer.</em></h1>
         <p className="guide-lede">For B2B SaaS teams where one qualified deal can be worth thousands of dollars. We test buyer-intent questions across selected AI answer platforms, map competitors and cited sources, then deliver a commercially prioritized action plan.</p>
@@ -35,7 +31,6 @@ export default function ServicesPage() {
           <p>Implementation, repeat measurement, and monthly monitoring can be separately scoped and quoted after the initial study. No fake reviews, paid-for undisclosed mentions, or fabricated visibility data. We do not sell fake reviews, spammy placements, or fabricated visibility reports.</p>
         </section>
       </article>
-      <footer className="footer"><div className="shell footer-inner"><Link className="brand" href="/"><span className="brand-mark">C</span><span>Cite<span className="brand-light">Glance</span></span></Link><span><Link href="/free-tools">Free tools</Link> · <Link href="/pricing">Pricing</Link> · <Link href="/chatgpt-visibility">Guides</Link></span><span>Useful evidence. Practical improvements. No ranking guarantees.</span><span>© {new Date().getFullYear()} CiteGlance</span></div></footer>
-    </main>
+</main>
   );
 }
