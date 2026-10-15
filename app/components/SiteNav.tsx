@@ -28,7 +28,7 @@ export default function SiteNav() {
   }
 
   function homeAnchor(anchor: string) {
-    return pathname === "/" ? anchor : "/" + anchor.replace(/^#/, "#");
+    return pathname === "/" ? anchor : "/" + anchor;
   }
 
   return (
@@ -41,9 +41,10 @@ export default function SiteNav() {
         </Link>
 
         <div className={menuOpen ? "cg3-nav-links is-open" : "cg3-nav-links"}>
-          {primaryLinks.map((item) => {
+          <div className="cg4-mobile-menu-inner">
+        {primaryLinks.map((item) => {
             const href = item.label === "Method" ? homeAnchor("#method") : item.path;
-            const active = item.activePath === "/" ? pathname === "/" : pathname === item.activePath;
+            const active = item.label !== "Method" && pathname === item.activePath;
             return (
               <Link key={item.label} href={href} onClick={() => handleNavigation(href)}
                 aria-current={active ? "page" : undefined}
@@ -67,7 +68,7 @@ export default function SiteNav() {
       <div id="cg4-mobile-links" className={menuOpen ? "cg4-mobile-menu is-open" : "cg4-mobile-menu"} aria-hidden={!menuOpen}>
         {primaryLinks.map((item) => {
           const href = item.label === "Method" ? homeAnchor("#method") : item.path;
-          const active = item.activePath === "/" ? pathname === "/" : pathname === item.activePath;
+          const active = item.label !== "Method" && pathname === item.activePath;
           return (
             <Link key={item.label} href={href} tabIndex={menuOpen ? 0 : -1}
               onClick={() => handleNavigation(href)} className={active ? "is-current" : ""}>
@@ -75,6 +76,7 @@ export default function SiteNav() {
             </Link>
           );
         })}
+        </div>
       </div>
     </div>
   );
