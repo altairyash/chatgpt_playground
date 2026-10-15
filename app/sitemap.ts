@@ -7,5 +7,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 1,
     },
+    {
+      url: "https://chatgptplayground.vercel.app/aeo-guide",
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
   ];
 }
