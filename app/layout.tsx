@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Signal Audit — Make your website easier to understand",
+  title: "Signal Audit — AEO & AI Search Readiness Audit",
   description:
-    "A practical technical audit for website structure, metadata, crawlability, and machine-readable content. Clear fixes, no ranking promises.",
-  metadataBase: new URL("https://example.com"),
+    "Check your website’s readiness for AI search and answer engines. Review crawlability, metadata, structured data signals, and machine-readable content. Practical findings, no ranking promises.",
+  metadataBase: new URL("https://chatgptplayground.vercel.app"),
   openGraph: {
-    title: "Signal Audit",
-    description: "Clear, practical website search-readiness fixes.",
+    title: "Signal Audit — AEO & AI Search Readiness",
+    description: "AEO readiness checks for crawlability, metadata, structured data signals, and AI-readable content. Practical findings without ranking guarantees.",
     type: "website",
   },
 };
