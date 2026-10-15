@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
 import AuditTool from "./components/AuditTool";
+import { TabsRoot, TabsList, TabsTrigger, TabsContent } from "./components/ui/Tabs";
 import Link from "next/link";
 
 type ResearchView = "questions" | "answers" | "sources";
@@ -100,12 +101,13 @@ export default function Home() {
             <span className="cg3-mono-label">THE QUESTION</span>
             <p>“Which platforms are worth shortlisting for <em>[this job to be done]</em>?”</p>
           </div>
-          <div className="cg3-tabs" role="tablist" aria-label="Research stages">
-            <button id="cg3-tab-questions" type="button" role="tab" aria-controls="cg3-research-panel" aria-selected={researchView === "questions"} className={researchView === "questions" ? "is-active" : ""} onClick={() => setResearchView("questions")}>Prompts</button>
-            <button id="cg3-tab-answers" type="button" role="tab" aria-controls="cg3-research-panel" aria-selected={researchView === "answers"} className={researchView === "answers" ? "is-active" : ""} onClick={() => setResearchView("answers")}>Answer log</button>
-            <button id="cg3-tab-sources" type="button" role="tab" aria-controls="cg3-research-panel" aria-selected={researchView === "sources"} className={researchView === "sources" ? "is-active" : ""} onClick={() => setResearchView("sources")}>Source map</button>
-          </div>
-          <div key={researchView} className="cg3-research-detail" id="cg3-research-panel" role="tabpanel" aria-labelledby={"cg3-tab-" + researchView}>
+          <TabsRoot value={researchView} onValueChange={(value) => setResearchView(value as ResearchView)} className="cg21-tabs-root">
+            <TabsList className="cg3-tabs" aria-label="Research stages">
+              <TabsTrigger value="questions">Prompts</TabsTrigger>
+              <TabsTrigger value="answers">Answer log</TabsTrigger>
+              <TabsTrigger value="sources">Source map</TabsTrigger>
+            </TabsList>
+            <TabsContent value={researchView} key={researchView} className="cg3-research-detail">
             <span className="cg3-mono-label">{activeResearch.eyebrow}</span>
             <h2>{activeResearch.title}</h2>
             <p>{activeResearch.body}</p>
@@ -118,7 +120,8 @@ export default function Home() {
                 </div>
               ))}
             </div>
-          </div>
+          </TabsContent>
+          </TabsRoot>
           <div className="cg3-card-foot"><span>Designed to be checked, not taken on faith.</span><span>METHOD NOTE ↗</span></div>
           <p className="cg3-sample-disclaimer">Illustrative layout only. No live AI query, customer result, or performance claim is shown.</p>
         </div>
