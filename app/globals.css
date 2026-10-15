@@ -1223,3 +1223,9 @@ body { background: #f7f6f1; color: #191b19; }
   .cg4-route-progress.is-active { animation: none; width: 100%; }
   .cg3-work-item, .cg3-offer-card, .pricing-card, .cg3-button, .cg3-nav-cta { transition: none !important; }
 }
+
+
+/* Mobile nav collapses a single inner track so all links animate as one panel. */
+@media (max-width: 600px) {
+  .cg4-mobile-menu-inner { min-height: 0; overflow: hidden; }
+}
