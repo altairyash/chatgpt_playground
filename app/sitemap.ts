@@ -17,5 +17,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.8,
     },
+    {
+      url: "https://chatgptplayground.vercel.app/services",
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
   ];
 }
