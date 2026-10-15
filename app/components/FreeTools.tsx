@@ -105,7 +105,7 @@ export default function FreeTools() {
     <main className="shell free-tools-page">
       <nav className="nav free-tools-nav">
         <a className="brand" href="/"><span className="brand-mark">C</span><span>Cite<span className="brand-light">Glance</span></span></a>
-        <div className="aeonav-links"><a className="nav-link" href="/services">Services</a><a className="button button-primary" href="/#assessment">Get assessed <span aria-hidden="true">↗</span></a></div>
+        <div className="aeonav-links"><a className="nav-link" href="/pricing">Pricing</a><a className="nav-link" href="/services">Services</a><a className="button button-primary" href="/#assessment">Get assessed <span aria-hidden="true">↗</span></a></div>
       </nav>
       <header className="free-tools-hero">
         <div className="eyebrow">FREE · NO ACCOUNT REQUIRED</div>
