@@ -1,9 +1,11 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import type { KeyboardEvent } from "react";
 import Link from "next/link";
 
 type ToolTab = "robots" | "llms" | "meta";
+const toolTabs: ToolTab[] = ["robots", "llms", "meta"];
 
 function normalizeHttpUrl(raw: string): string | null {
   try {
@@ -29,18 +31,21 @@ function downloadText(filename: string, content: string, type = "text/plain") {
   const anchor = document.createElement("a");
   anchor.href = url;
   anchor.download = filename;
+  anchor.style.display = "none";
+  document.body.appendChild(anchor);
   anchor.click();
+  anchor.remove();
   window.setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
 export default function FreeTools() {
   const [active, setActive] = useState<ToolTab>("robots");
   const [robotsMode, setRobotsMode] = useState("open");
-  const [sitemap, setSitemap] = useState("https://example.com/sitemap.xml");
+  const [sitemap, setSitemap] = useState("");
   const [blockTraining, setBlockTraining] = useState(false);
   const [siteName, setSiteName] = useState("");
   const [siteDescription, setSiteDescription] = useState("");
-  const [siteUrl, setSiteUrl] = useState("https://example.com");
+  const [siteUrl, setSiteUrl] = useState("");
   const [pageTitle, setPageTitle] = useState("");
   const [pageDescription, setPageDescription] = useState("");
   const [ogImage, setOgImage] = useState("");
@@ -125,8 +130,24 @@ export default function FreeTools() {
 
   const output = active === "robots" ? robotsOutput : active === "llms" ? llmsOutput : metaOutput;
 
+  function handleTabKeyDown(event: KeyboardEvent<HTMLButtonElement>) {
+    const currentIndex = toolTabs.indexOf(active);
+    let nextIndex = currentIndex;
+    if (event.key === "ArrowRight") nextIndex = (currentIndex + 1) % toolTabs.length;
+    else if (event.key === "ArrowLeft") nextIndex = (currentIndex - 1 + toolTabs.length) % toolTabs.length;
+    else if (event.key === "Home") nextIndex = 0;
+    else if (event.key === "End") nextIndex = toolTabs.length - 1;
+    else return;
+    event.preventDefault();
+    const next = toolTabs[nextIndex];
+    setActive(next);
+    setCopied("");
+    window.requestAnimationFrame(() => document.getElementById("free-tools-tab-" + next)?.focus());
+  }
+
   return (
-    <main className="shell free-tools-page cg4-inner cg4-free-tools-page">
+    <main className="cg4-inner cg4-free-tools-page">
+      <div className="shell">
 <header className="free-tools-hero">
         <div className="eyebrow">FREE · NO ACCOUNT REQUIRED</div>
         <h1>Small tools for a more <em>discoverable website.</em></h1>
@@ -136,11 +157,11 @@ export default function FreeTools() {
 
       <section className="free-tools-workbench" aria-label="Free website tools">
         <div className="free-tools-tabs" role="tablist" aria-label="Choose a tool">
-          <button type="button" role="tab" aria-selected={active === "robots"} className={active === "robots" ? "active" : ""} onClick={() => { setActive("robots"); setCopied(""); }}>robots.txt builder</button>
-          <button type="button" role="tab" aria-selected={active === "llms"} className={active === "llms" ? "active" : ""} onClick={() => { setActive("llms"); setCopied(""); }}>llms.txt starter</button>
-          <button type="button" role="tab" aria-selected={active === "meta"} className={active === "meta" ? "active" : ""} onClick={() => { setActive("meta"); setCopied(""); }}>Open Graph tags</button>
+          <button id="free-tools-tab-robots" type="button" role="tab" aria-controls="free-tools-panel" aria-selected={active === "robots"} tabIndex={active === "robots" ? 0 : -1} className={active === "robots" ? "active" : ""} onKeyDown={handleTabKeyDown} onClick={() => { setActive("robots"); setCopied(""); }}>robots.txt builder</button>
+          <button id="free-tools-tab-llms" type="button" role="tab" aria-controls="free-tools-panel" aria-selected={active === "llms"} tabIndex={active === "llms" ? 0 : -1} className={active === "llms" ? "active" : ""} onKeyDown={handleTabKeyDown} onClick={() => { setActive("llms"); setCopied(""); }}>llms.txt starter</button>
+          <button id="free-tools-tab-meta" type="button" role="tab" aria-controls="free-tools-panel" aria-selected={active === "meta"} tabIndex={active === "meta" ? 0 : -1} className={active === "meta" ? "active" : ""} onKeyDown={handleTabKeyDown} onClick={() => { setActive("meta"); setCopied(""); }}>Open Graph tags</button>
         </div>
-        <div key={active} className="free-tools-columns">
+        <div key={active} id="free-tools-panel" role="tabpanel" aria-labelledby={"free-tools-tab-" + active} tabIndex={0} className="free-tools-columns">
           <div className="free-tools-fields">
             {active === "robots" && <>
               <h2>Build your robots.txt</h2>
@@ -176,8 +197,8 @@ export default function FreeTools() {
             </>}
           </div>
           <div className="free-tools-output">
-            <div className="free-tools-output-head"><div><span className="eyebrow">LIVE OUTPUT</span><strong>{active === "robots" ? "robots.txt" : active === "llms" ? "llms.txt" : "meta-tags.html"}</strong></div><span className="free-tools-live">UPDATING LIVE</span></div>
-            <pre>{output}</pre>
+            <div className="free-tools-output-head"><div><span className="eyebrow">LIVE OUTPUT</span><strong>{active === "robots" ? "robots.txt" : active === "llms" ? "llms.txt" : "meta-tags.html"}</strong></div><span className="free-tools-live">LIVE PREVIEW</span></div>
+            <pre aria-label="Generated file preview">{output}</pre>
             <div className="free-tools-output-actions">
               <button type="button" onClick={() => copyOutput(output, "Copied to clipboard.")}>Copy output</button>
               <button type="button" onClick={() => downloadText(active === "robots" ? "robots.txt" : active === "llms" ? "llms.txt" : "meta-tags.html", output, active === "meta" ? "text/html" : "text/plain")}>Download file</button>
@@ -191,6 +212,7 @@ export default function FreeTools() {
         <div><div className="eyebrow">THE NEXT STEP</div><h2>Files are a start.<br/><em>Evidence is better.</em></h2><p>Use the free AEO readiness check to inspect your public homepage, then get a scoped review if you need buyer-prompt research, competitor comparisons, and prioritized actions.</p></div>
         <div className="free-tools-next-actions"><Link className="button button-primary" href="/#free-check">Run the free site check <span aria-hidden="true">↗</span></Link><Link className="text-link" href="/services">Explore the paid sprint ↗</Link></div>
       </section>
-</main>
+      </div>
+    </main>
   );
 }
