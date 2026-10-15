@@ -108,19 +108,22 @@ export default function Home() {
               <TabsTrigger value="sources">Source map</TabsTrigger>
             </TabsList>
             <TabsContent value={researchView} key={researchView} className="cg3-research-detail">
-            <span className="cg3-mono-label">{activeResearch.eyebrow}</span>
-            <h2>{activeResearch.title}</h2>
-            <p>{activeResearch.body}</p>
-            <div className="cg3-evidence-list">
-              {activeResearch.rows.map((row, index) => (
-                <div className="cg3-evidence-row" key={row.label}>
-                  <span className="cg3-evidence-number">0{index + 1}</span>
-                  <div><strong>{row.label}</strong><small>{row.detail}</small></div>
-                  <span className="cg3-evidence-arrow" aria-hidden="true">↗</span>
-                </div>
-              ))}
-            </div>
-          </TabsContent>
+              <span className="cg3-mono-label">{activeResearch.eyebrow}</span>
+              <h2>{activeResearch.title}</h2>
+              <p>{activeResearch.body}</p>
+              <div className="cg3-evidence-list">
+                {activeResearch.rows.map((row, index) => (
+                  <div className="cg3-evidence-row" key={row.label}>
+                    <span className="cg3-evidence-number">0{index + 1}</span>
+                    <div>
+                      <strong>{row.label}</strong>
+                      <small>{row.detail}</small>
+                    </div>
+                    <span className="cg3-evidence-arrow" aria-hidden="true">↗</span>
+                  </div>
+                ))}
+              </div>
+            </TabsContent>
           </TabsRoot>
           <div className="cg3-card-foot"><span>Designed to be checked, not taken on faith.</span><span>METHOD NOTE ↗</span></div>
           <p className="cg3-sample-disclaimer">Illustrative layout only. No live AI query, customer result, or performance claim is shown.</p>
