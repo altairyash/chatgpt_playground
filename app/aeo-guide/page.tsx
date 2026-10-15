@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "AEO: A Practical Guide to AI Search Readiness | AEO Studio",
+  title: "AEO: A Practical Guide to AI Search Readiness | CiteGlance",
   description: "Learn what answer engine optimization can and cannot do, which technical signals to check, and how to measure whether AI search visibility is improving.",
   alternates: { canonical: "/aeo-guide" },
   openGraph: {
@@ -23,16 +23,12 @@ const checklist = [
 
 export default function AeoGuidePage() {
   return (
-    <main>
-      <nav className="nav shell">
-        <Link className="brand" href="/" aria-label="AEO Studio home"><span className="brand-mark">A</span><span>AEO<span className="brand-light"> studio</span></span></Link>
-        <Link className="nav-link" href="/#free-check">Free AEO check <span aria-hidden="true">↗</span></Link>
-      </nav>
-      <article className="shell guide-article">
+    <main className="cg4-inner cg4-article-page cg4-guide-page">
+<article className="shell guide-article">
         <div className="eyebrow">THE PRACTICAL GUIDE · AEO</div>
         <h1>Make your brand easier for answer engines to <em>understand.</em></h1>
         <p className="guide-lede">Answer Engine Optimization (AEO) is the work of making information about a brand useful, accessible, and clear enough that search and AI answer systems can discover it, interpret it, and potentially cite it. It is not a secret switch that guarantees a recommendation.</p>
-        <p className="guide-updated">A practical framework from AEO Studio · Updated October 2026</p>
+        <p className="guide-updated">A practical framework from CiteGlance · Updated October 2026</p>
 
         <section className="guide-section">
           <h2>SEO and AEO are related, not interchangeable</h2>
@@ -65,7 +61,6 @@ export default function AeoGuidePage() {
           <Link className="button button-primary" href="/#free-check">Run the free AEO check <span aria-hidden="true">↗</span></Link>
         </section>
       </article>
-      <footer className="footer"><div className="shell footer-inner"><Link className="brand" href="/"><span className="brand-mark">A</span><span>AEO<span className="brand-light"> studio</span></span></Link><span>Useful evidence. Practical improvements. No ranking guarantees.</span><span>© {new Date().getFullYear()} AEO Studio</span></div></footer>
-    </main>
+</main>
   );
 }
