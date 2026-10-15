@@ -35,7 +35,7 @@ export default function ServicesPage() {
           <p>Implementation, repeat measurement, and monthly monitoring can be separately scoped and quoted after the initial study. No fake reviews, paid-for undisclosed mentions, or fabricated visibility data. We do not sell fake reviews, spammy placements, or fabricated visibility reports.</p>
         </section>
       </article>
-      <footer className="footer"><div className="shell footer-inner"><Link className="brand" href="/">Cite<span className="brand-light">Glance</span></Link><span>Useful evidence. Practical improvements. No ranking guarantees.</span><span>© {new Date().getFullYear()} CiteGlance</span></div></footer>
+      <footer className="footer"><div className="shell footer-inner"><Link className="brand" href="/"><span className="brand-mark">C</span><span>Cite<span className="brand-light">Glance</span></span></Link><span><Link href="/free-tools">Free tools</Link> · <Link href="/pricing">Pricing</Link> · <Link href="/chatgpt-visibility">Guides</Link></span><span>Useful evidence. Practical improvements. No ranking guarantees.</span><span>© {new Date().getFullYear()} CiteGlance</span></div></footer>
     </main>
   );
 }
