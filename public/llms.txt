@@ -1,6 +1,6 @@
-# AEO Studio
+# CiteGlance
 
-> AEO Studio helps brands improve their visibility in AI-generated answers through Answer Engine Optimization (AEO): baseline measurement, citation research, competitor analysis, and practical content improvements.
+> CiteGlance helps brands improve their visibility in AI-generated answers through Answer Engine Optimization (AEO): baseline measurement, citation research, competitor analysis, and practical content improvements.
 
 ## Service
 - Helps brands understand whether they appear in answers to buyer questions across selected AI answer experiences.
@@ -14,10 +14,10 @@
 - The checker does not query ChatGPT, Gemini, Perplexity, or other answer engines and does not validate schema comprehensively.
 
 ## Guides
-- AEO guide: https://chatgptplayground.vercel.app/aeo-guide
-- How to check whether ChatGPT mentions your brand: https://chatgptplayground.vercel.app/chatgpt-visibility
-- Services: https://chatgptplayground.vercel.app/services
+- AEO guide: https://www.citeglance.com/aeo-guide
+- How to check whether ChatGPT mentions your brand: https://www.citeglance.com/chatgpt-visibility
+- Services: https://www.citeglance.com/services
 
 ## Website
-- Homepage: https://chatgptplayground.vercel.app/
-- Free technical check: https://chatgptplayground.vercel.app/#free-check
+- Homepage: https://www.citeglance.com/
+- Free technical check: https://www.citeglance.com/#free-check
