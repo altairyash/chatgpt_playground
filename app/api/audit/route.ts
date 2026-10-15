@@ -60,7 +60,7 @@ async function getPublicResponse(raw: string) {
   throw new Error("Too many redirects. Try the final URL shown in your browser.");
 }
 
-function check(label: string, passed: boolean, detail: string) {
+function check(label: string, passed: boolean, detail: string): { label: string; status: "pass" | "review"; detail: string } {
   return { label, status: passed ? "pass" : "review", detail };
 }
 
