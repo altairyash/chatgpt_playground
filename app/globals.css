@@ -1229,3 +1229,16 @@ body { background: #f7f6f1; color: #191b19; }
 @media (max-width: 600px) {
   .cg4-mobile-menu-inner { min-height: 0; overflow: hidden; }
 }
+
+
+
+/* Small state transitions for the interactive research demo and live tool workbench */
+@keyframes cg4-panel-swap {
+  from { opacity: .35; transform: translateY(7px); filter: blur(1px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+.cg3-research-detail { animation: cg4-panel-swap 360ms cubic-bezier(.2,.7,.2,1) both; }
+.cg4-free-tools-page .free-tools-columns { animation: cg4-panel-swap 300ms cubic-bezier(.2,.7,.2,1) both; }
+@media (prefers-reduced-motion: reduce) {
+  .cg3-research-detail, .cg4-free-tools-page .free-tools-columns { animation: none !important; }
+}
