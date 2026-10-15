@@ -3,99 +3,81 @@
 import { FormEvent, useState } from "react";
 import AuditTool from "./components/AuditTool";
 
-const outcomes = [
-  { n: "01", title: "Know where you show up", body: "Build a baseline across buyer questions and selected AI answer experiences. Separate observed mentions and citations from assumptions." },
-  { n: "02", title: "Find the sources shaping answers", body: "Map competitor citations, review sites, comparison pages, directories, and other credible sources worth understanding." },
-  { n: "03", title: "Close the visibility gaps", body: "Prioritize answer-ready pages, clearer product facts, structured data, useful comparison content, and credible third-party coverage." },
-  { n: "04", title: "Measure what changes", body: "Repeat the same prompt set over time and connect visibility trends to qualified visits and leads when analytics data is available." },
-];
-const methodSteps = [
-  { n: "01", title: "Baseline", body: "Define your category, audience, competitors, markets, and the prompts your buyers actually ask." },
-  { n: "02", title: "Prioritize", body: "Use observed answers and cited sources to create a ranked plan—not a generic checklist or a promise of instant rankings." },
-  { n: "03", title: "Improve", body: "Implement the highest-value content and technical changes, with your approval for any publishing or outreach." },
-  { n: "04", title: "Re-measure", body: "Re-run the same prompts, report changes, and adjust based on evidence." },
+const signals = [
+  { id: "01", title: "The answers buyers actually see", body: "Test real buying questions across selected AI experiences. Capture brand mentions, competitors, and the sources behind the response." },
+  { id: "02", title: "The sources influencing the shortlist", body: "Find the comparison pages, review platforms, publisher coverage, and product documentation shaping recommendations." },
+  { id: "03", title: "A plan your team can act on", body: "Turn the evidence into a ranked set of content, technical, and third-party visibility improvements—with clear reasoning." },
 ];
 
 export default function Home() {
   const [website, setWebsite] = useState("");
   const [email, setEmail] = useState("");
   const [company, setCompany] = useState("");
-  const [goal, setGoal] = useState("Appear in AI recommendations");
+  const [goal, setGoal] = useState("Understand why competitors are recommended");
   const [sent, setSent] = useState(false);
 
   function submitLead(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const inbox = process.env.NEXT_PUBLIC_CONTACT_EMAIL;
-    if (!inbox) {
-      setSent(true);
-      return;
-    }
+    if (!inbox) { setSent(true); return; }
     const subject = encodeURIComponent("CiteGlance — AI buyer visibility sprint");
-    const body = encodeURIComponent(
-      `New AEO assessment request\n\nWebsite: ${website}\nCompany: ${company || "Not provided"}\nContact: ${email}\nGoal: ${goal}\n\nPlease follow up to scope the initial assessment.`
-    );
+    const body = encodeURIComponent(`Website: ${website}\nCompany: ${company || "Not provided"}\nContact: ${email}\nGoal: ${goal}\n\nPlease follow up to scope the AI buyer visibility sprint.`);
     window.location.href = `mailto:${inbox}?subject=${subject}&body=${body}`;
     setSent(true);
   }
 
   return (
-    <main>
-      <nav className="nav shell aeonav">
-        <a className="brand" href="#top" aria-label="CiteGlance home"><span className="brand-mark">C</span><span>Cite<span className="brand-light">Glance</span></span></a>
-        <div className="aeonav-links"><a className="nav-link" href="#method">Method</a><a className="nav-link" href="/free-tools">Free tools</a><a className="nav-link" href="/pricing">Pricing</a><a className="nav-link" href="/services">Services</a><a className="nav-link" href="/chatgpt-visibility">Guides</a><a className="button button-primary" href="#assessment">Get assessed <span aria-hidden="true">↗</span></a></div>
+    <main className="cg2">
+      <nav className="cg2-nav">
+        <a className="cg2-logo" href="#top" aria-label="CiteGlance home"><span className="cg2-logo-mark">c<span>.</span></span><span>CiteGlance</span></a>
+        <div className="cg2-nav-links"><a href="#approach">Approach</a><a href="/free-tools">Free tools</a><a href="/pricing">Pricing</a><a href="/services">Services</a></div>
+        <a className="cg2-nav-cta" href="#assessment">Get your baseline <span>↗</span></a>
       </nav>
 
-      <section className="aeo-hero shell" id="top">
-        <div className="aeo-hero-copy">
-          <div className="eyebrow"><span className="pulse" /> ANSWER ENGINE OPTIMIZATION</div>
-          <h1>When customers ask AI who to choose, <em>be in the conversation.</em></h1>
-          <p className="aeo-lede">CiteGlance helps growth-stage B2B software companies understand whether AI tools surface their product when buyers compare solutions. Get a buyer-prompt visibility study, competitor and citation-source analysis, and a prioritized growth plan—without made-up scores or ranking promises.</p>
-          <div className="hero-actions"><a className="button button-primary" href="#assessment">Get an AI visibility baseline <span aria-hidden="true">↗</span></a><a className="text-link" href="#method">See how it works <span aria-hidden="true">↓</span></a></div>
-          <div className="trust-row"><span><span className="check">✓</span> Evidence before edits</span><span><span className="check">✓</span> Built around buyer prompts</span><span><span className="check">✓</span> No ranking guarantees</span></div>
+      <section className="cg2-hero" id="top">
+        <div className="cg2-hero-grid" aria-hidden="true"></div>
+        <div className="cg2-hero-copy">
+          <div className="cg2-kicker"><span className="cg2-live"></span> AI DISCOVERY INTELLIGENCE FOR B2B</div>
+          <h1>When AI makes the shortlist, <em>make sure you're on it.</em></h1>
+          <p className="cg2-lede">See how your product appears when buyers ask AI what to buy. Get the evidence, the competitor context, and a clear plan to close the gaps.</p>
+          <div className="cg2-hero-actions"><a className="cg2-button" href="#assessment">Explore your visibility <span>↗</span></a><a className="cg2-quiet-link" href="#approach">See how it works <span>↓</span></a></div>
+          <div className="cg2-proof-points"><span><b>↗</b> Buyer-intent prompts</span><span><b>◈</b> Source-level evidence</span><span><b>✓</b> No ranking promises</span></div>
         </div>
-        <div className="aeo-visual" aria-label="Illustrative AI answer visibility report">
-          <div className="aeo-orbit"></div>
-          <div className="aeo-report">
-            <div className="aeo-report-top"><span className="window-dots"><i /><i /><i /></span><span>AI VISIBILITY SNAPSHOT</span><span className="status">SAMPLE</span></div>
-            <div className="aeo-question"><small>BUYER PROMPT</small><strong>“What is the best solution for my team?”</strong></div>
-            <div className="aeo-answer"><span className="answer-avatar">AI</span><div><strong>Brand mention</strong><p>Was your brand named in the answer?</p></div><span className="answer-tag">TRACK</span></div>
-            <div className="aeo-answer"><span className="answer-avatar cite">↗</span><div><strong>Source citations</strong><p>Which pages informed the recommendation?</p></div><span className="answer-tag">MAP</span></div>
-            <div className="aeo-answer"><span className="answer-avatar comp">◎</span><div><strong>Competitor share</strong><p>Who appears instead—and why?</p></div><span className="answer-tag">COMPARE</span></div>
-            <div className="aeo-report-foot"><span>01</span><div><strong>Observe → improve → repeat</strong><small>Illustrative workflow, not customer data</small></div></div>
-          </div>
+        <div className="cg2-product" aria-label="Illustrative AI discovery research dashboard">
+          <div className="cg2-product-top"><div><span className="cg2-product-dot"></span><span>RESEARCH WORKSPACE</span></div><span className="cg2-demo-label">ILLUSTRATIVE DATA</span></div>
+          <div className="cg2-product-title"><div><small>BUYER QUESTION / 014</small><h2>“Best platform for securing AI agents?”</h2></div><span className="cg2-round-arrow">↗</span></div>
+          <div className="cg2-metrics"><div><small>BRAND MENTIONS</small><strong>06 <i>of 20</i></strong><span className="cg2-meter"><i style={{width:"30%"}} /></span></div><div><small>SOURCE CITATIONS</small><strong>12 <i>observed</i></strong><span className="cg2-meter"><i style={{width:"62%"}} /></span></div><div><small>COMPETITORS FOUND</small><strong>04 <i>brands</i></strong><span className="cg2-meter"><i style={{width:"45%"}} /></span></div></div>
+          <div className="cg2-table-head"><span>OBSERVED IN ANSWERS</span><span>FINDING</span></div>
+          <div className="cg2-result"><span className="cg2-result-icon cg2-purple">P</span><div><strong>Your product</strong><small>Named in 6 sampled answers</small></div><span className="cg2-result-status">MENTIONED</span></div>
+          <div className="cg2-result"><span className="cg2-result-icon cg2-yellow">↗</span><div><strong>Comparison source</strong><small>Third-party list shapes the shortlist</small></div><span className="cg2-result-status cg2-status-warn">OPPORTUNITY</span></div>
+          <div className="cg2-result"><span className="cg2-result-icon cg2-green">◎</span><div><strong>Competitor coverage</strong><small>Two rivals appear more consistently</small></div><span className="cg2-result-status">INVESTIGATE</span></div>
+          <div className="cg2-product-foot"><span><b>↳</b> Every finding is tied to an observed prompt.</span><span>VIEW METHOD ↗</span></div>
         </div>
-        <div className="hero-index"><span>01 / 04</span><span className="index-rule" /><span>AI SEARCH VISIBILITY</span></div>
+        <div className="cg2-hero-bottom"><span>RESEARCH, NOT GUESSWORK.</span><span>01 — MEASURE&nbsp;&nbsp; / &nbsp;&nbsp;02 — UNDERSTAND&nbsp;&nbsp; / &nbsp;&nbsp;03 — IMPROVE</span></div>
       </section>
 
-      <section className="proof-strip"><div className="shell proof-inner"><span className="proof-label">The work spans</span><span>AI VISIBILITY</span><b>·</b><span>CITATION RESEARCH</span><b>·</b><span>CONTENT STRATEGY</span><b>·</b><span>MEASUREMENT</span></div></section>
+      <section className="cg2-marquee" aria-label="Service capabilities"><span>AI ANSWER VISIBILITY</span><i>✳</i><span>CITATION RESEARCH</span><i>✳</i><span>COMPETITOR INTELLIGENCE</span><i>✳</i><span>CONTENT PRIORITIZATION</span></section>
 
-      <section className="section shell aeo-outcomes" id="what-we-do">
-        <div className="section-intro"><div className="eyebrow">THE AEO LOOP</div><h2>From AI answers<br />to <em>actionable work.</em></h2><p>Dashboards alone do not improve visibility. The job is to identify the gaps, make credible improvements, and measure whether the answers change.</p></div>
-        <div className="checks-list">{outcomes.map((item) => <article className="check-item" key={item.n}><span className="check-number">{item.n}</span><div><h3>{item.title}</h3><p>{item.body}</p></div><span className="item-arrow">↗</span></article>)}</div>
+      <section className="cg2-approach" id="approach">
+        <div className="cg2-section-head"><div><div className="cg2-section-label">01 / THE APPROACH</div><h2>Know what AI says.<br/><em>Know what to do next.</em></h2></div><p>AI visibility is not a magic score. It is a research problem: ask relevant questions, inspect the answers and their sources, then decide what deserves action.</p></div>
+        <div className="cg2-feature-grid">{signals.map((item, index) => <article className="cg2-feature" key={item.id}><div className="cg2-feature-top"><span>{item.id}</span><span className="cg2-feature-symbol">{index === 0 ? "↗" : index === 1 ? "⌕" : "↳"}</span></div><h3>{item.title}</h3><p>{item.body}</p><div className="cg2-feature-line"><span></span></div></article>)}</div>
       </section>
 
-      <section className="process-section" id="method"><div className="shell process-grid"><div><div className="eyebrow">A REPEATABLE METHOD</div><h2>Measure first.<br /><em>Improve with proof.</em></h2><p className="aeo-process-intro">AI answers vary by prompt, model, location, and time. A useful program tracks a consistent baseline and labels uncertainty honestly.</p></div><div className="process-steps">{methodSteps.map((item) => <div className="process-step" key={item.n}><span>{item.n}</span><div><h3>{item.title}</h3><p>{item.body}</p></div></div>)}</div></div></section>
-
-      <AuditTool />
-
-      <section className="request-section shell" id="assessment">
-        <div className="request-copy"><div className="eyebrow">START WITH YOUR BRAND</div><h2>Find your biggest<br /><em>AI visibility gaps.</em></h2><p>Built for B2B SaaS teams with meaningful contract values and active growth budgets. We test buyer-intent prompts, record which brands and sources appear, compare competitors, and translate the findings into specific actions. Platform access and test method are documented.</p><div className="price-note"><span className="price-dot" /><span><strong>AI Buyer Visibility Sprint · $1,500 fixed-scope</strong><small>20 buyer prompts · 3 AI platforms · competitor and source analysis · 30-day plan</small></span></div></div>
-        <form className="request-form" onSubmit={submitLead}>
-          <div className="form-top"><span className="form-icon">↗</span><div><strong>Request an AI buyer visibility sprint</strong><small>For B2B software teams evaluating AI-driven discovery</small></div></div>
-          <label htmlFor="site-url">Website URL</label><input id="site-url" type="url" placeholder="https://yourbrand.com" value={website} onChange={(e) => setWebsite(e.target.value)} required />
-          <label htmlFor="company-name">Brand or company <span className="aeo-optional">(optional)</span></label><input id="company-name" type="text" placeholder="Your company" value={company} onChange={(e) => setCompany(e.target.value)} />
-          <label htmlFor="contact-email">Work email</label><input id="contact-email" type="email" placeholder="you@company.com" value={email} onChange={(e) => setEmail(e.target.value)} required />
-          <label htmlFor="goal">Main goal</label><select id="goal" value={goal} onChange={(e) => setGoal(e.target.value)}><option>Appear in AI recommendations</option><option>Earn more citations</option><option>Understand competitors</option><option>Improve AI-driven leads</option></select>
-          <button className="button button-primary submit-button" type="submit">Request a scoped proposal <span aria-hidden="true">↗</span></button>
-          {sent && !process.env.NEXT_PUBLIC_CONTACT_EMAIL && <p className="form-message" role="status">The request is filled in, but the contact inbox is not configured. Please contact the site owner to finish setup.</p>}
-          {sent && process.env.NEXT_PUBLIC_CONTACT_EMAIL && <p className="form-message" role="status">Your email app should open with the request prepared. Send it to complete the request.</p>}
-          <p className="form-privacy">No payment is taken here. We confirm the scope before starting work.</p>
-        </form>
+      <section className="cg2-method">
+        <div className="cg2-method-copy"><div className="cg2-section-label">02 / HOW THE WORK RUNS</div><h2>Evidence first.<br/><em>Then action.</em></h2><p>AI answers change across prompts, models, and time. We document the test conditions, separate observation from interpretation, and make recommendations your team can verify.</p><a href="/services" className="cg2-dark-link">Explore the sprint <span>↗</span></a></div>
+        <div className="cg2-steps"><div className="cg2-step"><span>01</span><div><h3>Establish the baseline</h3><p>Agree the market, buyer prompts, competitors, and AI experiences to test.</p></div><b>↗</b></div><div className="cg2-step"><span>02</span><div><h3>Trace the evidence</h3><p>Record observed mentions, citations, recurring sources, and competitor patterns.</p></div><b>↗</b></div><div className="cg2-step"><span>03</span><div><h3>Prioritize the response</h3><p>Get a focused 30-day action plan with rationale, effort, and dependencies.</p></div><b>↗</b></div></div>
       </section>
 
-      <section className="aeo-faq shell"><div className="eyebrow">STRAIGHT ANSWERS</div><h2>AEO, without the <em>hype.</em></h2><div className="aeo-faq-grid"><article><h3>Can anyone guarantee a ChatGPT ranking?</h3><p>No. AI answers are probabilistic and change across prompts, models, and time. We measure observed visibility and work on factors we can reasonably influence.</p></article><article><h3>Is this just traditional SEO?</h3><p>It overlaps with technical SEO and content quality, but AEO also studies AI-generated mentions, citations, recommendation prompts, and competitor presence.</p></article><article><h3>Do you fabricate reviews or mentions?</h3><p>No. We focus on useful content, accurate company facts, technical clarity, and legitimate third-party visibility—not fake reviews or spam.</p></article><article><h3>Do you already track every AI platform automatically?</h3><p>The free checker is a technical snapshot, not an AI-engine rank tracker. Engine-level measurement must be scoped to the tools, access, and prompts actually available.</p></article></div></section>
+      <section className="cg2-tools"><div className="cg2-tools-heading"><div><div className="cg2-section-label">03 / START FOR FREE</div><h2>Useful tools. <em>No gatekeeping.</em></h2></div><p>Run a practical technical check before investing in deeper research.</p></div><div className="cg2-tool-card"><div className="cg2-tool-icon">⌘</div><div><h3>Website readiness toolkit</h3><p>Check technical signals and generate useful starter files for your site. It is a readiness check—not a claim about AI rankings.</p></div><a href="/free-tools">Open free tools <span>↗</span></a></div><AuditTool /></section>
 
-      <footer className="footer"><div className="shell footer-inner"><a className="brand" href="#top"><span className="brand-mark">C</span><span>Cite<span className="brand-light">Glance</span></span></a><span><a href="/free-tools">Free tools</a> · <a href="/aeo-guide">AEO guide</a> · <a href="/chatgpt-visibility">ChatGPT visibility playbook</a></span><span>Useful evidence. Practical improvements. No ranking guarantees.</span><span>© {new Date().getFullYear()} CiteGlance</span></div></footer>
+      <section className="cg2-assessment" id="assessment">
+        <div className="cg2-assessment-copy"><div className="cg2-section-label">04 / THE PAID SPRINT</div><h2>Stop guessing.<br/><em>See the evidence.</em></h2><p>Built for B2B software teams with meaningful contract values and active growth budgets. We test buyer-intent prompts, map competitors and cited sources, then deliver specific actions.</p><div className="cg2-offer"><div className="cg2-offer-price"><small>FIXED-SCOPE PROJECT</small><strong>$1,500</strong><span>one-time</span></div><div className="cg2-offer-details"><span>20 buyer-intent prompts</span><span>Up to 3 AI experiences, subject to access</span><span>Evidence-backed 30-day plan</span></div></div><small className="cg2-disclaimer">No promise of AI mentions, citations, rankings, or revenue. Scope and methods are agreed before work begins.</small></div>
+        <form className="cg2-form" onSubmit={submitLead}><div className="cg2-form-heading"><span>LET'S LOOK CLOSER <b>↗</b></span><h3>Request a scoped proposal</h3><p>Tell us where to start. No payment at this stage.</p></div><label htmlFor="cg2-site">Company website</label><input id="cg2-site" type="url" placeholder="https://yourcompany.com" value={website} onChange={e=>setWebsite(e.target.value)} required/><label htmlFor="cg2-company">Company name <span>(optional)</span></label><input id="cg2-company" type="text" placeholder="Your company" value={company} onChange={e=>setCompany(e.target.value)}/><label htmlFor="cg2-email">Work email</label><input id="cg2-email" type="email" placeholder="you@company.com" value={email} onChange={e=>setEmail(e.target.value)} required/><label htmlFor="cg2-goal">What do you want to understand?</label><select id="cg2-goal" value={goal} onChange={e=>setGoal(e.target.value)}><option>Understand why competitors are recommended</option><option>Check whether AI mentions our product</option><option>Find the sources behind AI answers</option><option>Prioritize our AI discovery strategy</option></select><button className="cg2-submit" type="submit">Request proposal <span>↗</span></button>{sent && !process.env.NEXT_PUBLIC_CONTACT_EMAIL && <p className="cg2-form-note" role="status">The inbox is not configured on this site yet, so the request has not been delivered.</p>}{sent && process.env.NEXT_PUBLIC_CONTACT_EMAIL && <p className="cg2-form-note" role="status">Your email app should open with the request prepared. Send it to complete the request.</p>}<p className="cg2-privacy">Your details are used only to respond to this request.</p></form>
+      </section>
+
+      <section className="cg2-faq"><div className="cg2-section-label">A FEW STRAIGHT ANSWERS</div><div className="cg2-faq-row"><h2>Clear-eyed about<br/><em>what AI can do.</em></h2><div><details><summary>Can you guarantee a ChatGPT ranking?</summary><p>No. AI answers vary by prompt, model, and time. We measure observed visibility and recommend changes we can reasonably support with evidence.</p></details><details><summary>Is this just traditional SEO?</summary><p>It overlaps with technical SEO and content quality, but also examines AI-generated mentions, citations, recommendation prompts, and competitor presence.</p></details><details><summary>Do you automatically track every AI platform?</summary><p>No blanket claim of coverage. The sprint specifies which platforms, prompts, and access methods are used, and records limitations.</p></details></div></div></section>
+
+      <footer className="cg2-footer"><a className="cg2-logo" href="#top"><span className="cg2-logo-mark">c<span>.</span></span><span>CiteGlance</span></a><div><a href="/free-tools">Free tools</a><a href="/pricing">Pricing</a><a href="/services">Services</a><a href="/aeo-guide">AEO guide</a></div><span>Independent research for a changing discovery landscape.</span><small>© {new Date().getFullYear()} CiteGlance</small></footer>
     </main>
   );
 }
