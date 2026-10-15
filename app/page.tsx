@@ -105,7 +105,7 @@ export default function Home() {
             <button id="cg3-tab-answers" type="button" role="tab" aria-controls="cg3-research-panel" aria-selected={researchView === "answers"} className={researchView === "answers" ? "is-active" : ""} onClick={() => setResearchView("answers")}>Answer log</button>
             <button id="cg3-tab-sources" type="button" role="tab" aria-controls="cg3-research-panel" aria-selected={researchView === "sources"} className={researchView === "sources" ? "is-active" : ""} onClick={() => setResearchView("sources")}>Source map</button>
           </div>
-          <div className="cg3-research-detail" id="cg3-research-panel" role="tabpanel" aria-labelledby={"cg3-tab-" + researchView}>
+          <div key={researchView} className="cg3-research-detail" id="cg3-research-panel" role="tabpanel" aria-labelledby={"cg3-tab-" + researchView}>
             <span className="cg3-mono-label">{activeResearch.eyebrow}</span>
             <h2>{activeResearch.title}</h2>
             <p>{activeResearch.body}</p>
