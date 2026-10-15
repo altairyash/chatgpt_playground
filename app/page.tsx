@@ -114,11 +114,11 @@ export default function Home() {
             <p>“Which platforms are worth shortlisting for <em>[this job to be done]</em>?”</p>
           </div>
           <div className="cg3-tabs" role="tablist" aria-label="Research stages">
-            <button type="button" role="tab" aria-selected={researchView === "questions"} className={researchView === "questions" ? "is-active" : ""} onClick={() => setResearchView("questions")}>Prompts</button>
-            <button type="button" role="tab" aria-selected={researchView === "answers"} className={researchView === "answers" ? "is-active" : ""} onClick={() => setResearchView("answers")}>Answer log</button>
-            <button type="button" role="tab" aria-selected={researchView === "sources"} className={researchView === "sources" ? "is-active" : ""} onClick={() => setResearchView("sources")}>Source map</button>
+            <button id="cg3-tab-questions" type="button" role="tab" aria-controls="cg3-research-panel" aria-selected={researchView === "questions"} className={researchView === "questions" ? "is-active" : ""} onClick={() => setResearchView("questions")}>Prompts</button>
+            <button id="cg3-tab-answers" type="button" role="tab" aria-controls="cg3-research-panel" aria-selected={researchView === "answers"} className={researchView === "answers" ? "is-active" : ""} onClick={() => setResearchView("answers")}>Answer log</button>
+            <button id="cg3-tab-sources" type="button" role="tab" aria-controls="cg3-research-panel" aria-selected={researchView === "sources"} className={researchView === "sources" ? "is-active" : ""} onClick={() => setResearchView("sources")}>Source map</button>
           </div>
-          <div className="cg3-research-detail" role="tabpanel">
+          <div className="cg3-research-detail" id="cg3-research-panel" role="tabpanel" aria-labelledby={"cg3-tab-" + researchView}>
             <span className="cg3-mono-label">{activeResearch.eyebrow}</span>
             <h2>{activeResearch.title}</h2>
             <p>{activeResearch.body}</p>
@@ -237,14 +237,14 @@ export default function Home() {
         <div className="cg3-tool-wrap"><AuditTool /></div>
       </section>
 
-      <section className="cg3-request" id="request">
+      <section className="cg3-request" id="assessment">
         <div className="cg3-request-copy">
           <span className="cg3-section-kicker">04 / TALK SCOPE, NOT SALES HYPE</span>
           <h2>Bring us the category. <em>We’ll bring the evidence.</em></h2>
           <p>For B2B software teams where being understood in the buying process matters. Share your site and what you need to learn; the first step is agreeing what can be tested.</p>
           <div className="cg3-request-points"><span><b>→</b> Scope agreed before payment</span><span><b>→</b> No made-up benchmarks or fake proof</span><span><b>→</b> Recommendations tied to observed evidence</span></div>
         </div>
-        <form className="cg3-form" onSubmit={submitLead}>
+        <form className="cg3-form" id="request" onSubmit={submitLead}>
           <div className="cg3-form-top"><span className="cg3-section-kicker">REQUEST DETAILS</span><span className="cg3-form-mark" aria-hidden="true">↗</span></div>
           <label htmlFor="cg3-website">Company website</label>
           <input id="cg3-website" type="url" placeholder="https://yourcompany.com" value={website} onChange={(event) => setWebsite(event.target.value)} required />
