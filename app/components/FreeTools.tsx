@@ -106,7 +106,7 @@ export default function FreeTools() {
     <main className="shell free-tools-page">
       <nav className="nav free-tools-nav">
         <Link className="brand" href="/"><span className="brand-mark">C</span><span>Cite<span className="brand-light">Glance</span></span></Link>
-        <div className="aeonav-links"><a className="nav-link" href="/pricing">Pricing</a><a className="nav-link" href="/services">Services</a><a className="button button-primary" href="/#assessment">Get assessed <span aria-hidden="true">↗</span></a></div>
+        <div className="aeonav-links"><a className="nav-link" href="/pricing">Pricing</a><a className="nav-link" href="/services">Services</a><Link className="button button-primary" href="/#assessment">Get assessed <span aria-hidden="true">↗</span></Link></div>
       </nav>
       <header className="free-tools-hero">
         <div className="eyebrow">FREE · NO ACCOUNT REQUIRED</div>
@@ -165,7 +165,7 @@ export default function FreeTools() {
 
       <section className="free-tools-next">
         <div><div className="eyebrow">THE NEXT STEP</div><h2>Files are a start.<br/><em>Evidence is better.</em></h2><p>Use the free AEO readiness check to inspect your public homepage, then get a scoped review if you need buyer-prompt research, competitor comparisons, and prioritized actions.</p></div>
-        <div className="free-tools-next-actions"><a className="button button-primary" href="/#free-check">Run the free site check <span aria-hidden="true">↗</span></a><a className="text-link" href="/services">Explore the paid sprint ↗</a></div>
+        <div className="free-tools-next-actions"><Link className="button button-primary" href="/#free-check">Run the free site check <span aria-hidden="true">↗</span></Link><a className="text-link" href="/services">Explore the paid sprint ↗</a></div>
       </section>
       <footer className="footer"><div className="footer-inner"><Link className="brand" href="/"><span className="brand-mark">C</span><span>Cite<span className="brand-light">Glance</span></span></Link><span>Free tools. Honest limitations. Useful evidence.</span><span>© {new Date().getFullYear()} CiteGlance</span></div></footer>
     </main>
