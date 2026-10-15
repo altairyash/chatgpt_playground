@@ -55,7 +55,7 @@ export default function AeoGuidePage() {
         <section className="guide-section">
           <h2>What to measure</h2>
           <p>Start with a small set of high-intent prompts such as “best [category] for [use case]” or “alternatives to [competitor]”. Run them consistently across the answer engines that matter to your customers. Record whether your brand is mentioned, whether a source URL is cited, which competitors appear, and whether the answer describes your offer correctly.</p>
-          <p>Then connect that visibility to business measures: qualified referral sessions, demo requests, sign-ups, and sales. A visibility score by itself is not revenue, and correlation does not prove that one content change caused a change in recommendations.</p>
+          <p>Then connect that visibility to business measures: qualified referral sessions, demo requests, sign-ups, and sales. A visibility score by itself is not revenue, and correlation does not prove that one content change caused a change in recommendations. For a step-by-step prompt and evidence workflow, read our <Link href="/chatgpt-visibility">guide to checking whether ChatGPT mentions your brand</Link>.</p>
         </section>
 
         <section className="guide-cta">
