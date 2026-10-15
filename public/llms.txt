@@ -13,7 +13,10 @@
 - Checks public homepage HTML for technical signals including title, meta description, H1 structure, canonical link, JSON-LD presence, indexing directives, image alt attributes, document language, Open Graph metadata, and whether robots.txt, sitemap.xml, and llms.txt are reachable.
 - The checker does not query ChatGPT, Gemini, Perplexity, or other answer engines and does not validate schema comprehensively.
 
+## Guides
+- AEO guide: https://chatgptplayground.vercel.app/aeo-guide
+- How to check whether ChatGPT mentions your brand: https://chatgptplayground.vercel.app/chatgpt-visibility
+
 ## Website
 - Homepage: https://chatgptplayground.vercel.app/
 - Free technical check: https://chatgptplayground.vercel.app/#free-check
-- AEO guide: https://chatgptplayground.vercel.app/aeo-guide
