@@ -133,11 +133,15 @@ export default function FreeTools() {
     <main className="cg4-inner cg4-free-tools-page">
       <div className="shell">
         <header className="free-tools-hero">
-        <div className="eyebrow">FREE · NO ACCOUNT REQUIRED</div>
-        <h1>Small tools for a more <em>discoverable website.</em></h1>
-        <p>Generate useful website files and metadata in your browser. No account, no paywall, and no claim that a generated file alone will make an AI assistant cite you.</p>
-        <div className="free-tools-pills"><span>Runs in your browser</span><span>Copy or download</span><span>Nothing submitted to CiteGlance</span></div>
-      </header>
+          <div className="eyebrow">FREE · NO ACCOUNT REQUIRED</div>
+          <h1>Small tools for a more <em>discoverable website.</em></h1>
+          <p>Generate useful website files and metadata in your browser. No account, no paywall, and no claim that a generated file alone will make an AI assistant cite you.</p>
+          <div className="free-tools-pills">
+            <span>Runs in your browser</span>
+            <span>Copy or download</span>
+            <span>Nothing submitted to CiteGlance</span>
+          </div>
+        </header>
 
       <section className="free-tools-workbench" aria-label="Free website tools">
         <TabsRoot value={active} onValueChange={(value) => { setActive(value as ToolTab); setCopied(""); }} className="cg21-tabs-root">
