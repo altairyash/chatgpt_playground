@@ -49,7 +49,7 @@ export default function ChatGPTVisibilityPage() {
         <section className="guide-section">
           <h2>2. Record the answer and its evidence</h2>
           <p>For each run, save the exact prompt, platform and model when known, date, market or locale, whether your brand appeared, whether the description was accurate, and any source URLs shown. Keep the original answer or a dated capture where permitted. Do not treat an unlinked brand mention as a citation.</p>
-          <p>Separate at least three outcomes: <strong>mention</strong> (the brand is named), <strong>citation</strong> (a source URL is provided), and <strong>recommendation fit</strong> (the answer connects the brand to the buyer's stated need). They are related but not interchangeable.</p>
+          <p>Separate at least three outcomes: <strong>mention</strong> (the brand is named), <strong>citation</strong> (a source URL is provided), and <strong>recommendation fit</strong> (the answer connects the brand to the buyer&apos;s stated need). They are related but not interchangeable.</p>
         </section>
 
         <section className="guide-section">
