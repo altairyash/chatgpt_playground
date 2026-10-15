@@ -9,7 +9,7 @@ const outcomes = [
   { n: "03", title: "Close the visibility gaps", body: "Prioritize answer-ready pages, clearer product facts, structured data, useful comparison content, and credible third-party coverage." },
   { n: "04", title: "Measure what changes", body: "Repeat the same prompt set over time and connect visibility trends to qualified visits and leads when analytics data is available." },
 ];
-const process = [
+const methodSteps = [
   { n: "01", title: "Baseline", body: "Define your category, audience, competitors, markets, and the prompts your buyers actually ask." },
   { n: "02", title: "Prioritize", body: "Use observed answers and cited sources to create a ranked plan—not a generic checklist or a promise of instant rankings." },
   { n: "03", title: "Improve", body: "Implement the highest-value content and technical changes, with your approval for any publishing or outreach." },
@@ -74,7 +74,7 @@ export default function Home() {
         <div className="checks-list">{outcomes.map((item) => <article className="check-item" key={item.n}><span className="check-number">{item.n}</span><div><h3>{item.title}</h3><p>{item.body}</p></div><span className="item-arrow">↗</span></article>)}</div>
       </section>
 
-      <section className="process-section" id="method"><div className="shell process-grid"><div><div className="eyebrow">A REPEATABLE METHOD</div><h2>Measure first.<br /><em>Improve with proof.</em></h2><p className="aeo-process-intro">AI answers vary by prompt, model, location, and time. A useful program tracks a consistent baseline and labels uncertainty honestly.</p></div><div className="process-steps">{process.map((item) => <div className="process-step" key={item.n}><span>{item.n}</span><div><h3>{item.title}</h3><p>{item.body}</p></div></div>)}</div></div></section>
+      <section className="process-section" id="method"><div className="shell process-grid"><div><div className="eyebrow">A REPEATABLE METHOD</div><h2>Measure first.<br /><em>Improve with proof.</em></h2><p className="aeo-process-intro">AI answers vary by prompt, model, location, and time. A useful program tracks a consistent baseline and labels uncertainty honestly.</p></div><div className="process-steps">{methodSteps.map((item) => <div className="process-step" key={item.n}><span>{item.n}</span><div><h3>{item.title}</h3><p>{item.body}</p></div></div>)}</div></div></section>
 
       <AuditTool />
 
