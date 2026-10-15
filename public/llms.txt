@@ -1,19 +1,19 @@
-# Signal Audit
+# AEO Studio
 
-> Signal Audit provides practical website diagnostics for Answer Engine Optimization (AEO) and AI search readiness.
+> AEO Studio helps brands improve their visibility in AI-generated answers through Answer Engine Optimization (AEO): baseline measurement, citation research, competitor analysis, and practical content improvements.
 
-## What it does
-- Checks public homepage HTML for technical signals including title, meta description, H1 structure, canonical link, JSON-LD presence, indexing directives, image alt attributes, and document language.
-- Checks whether standard public files such as robots.txt, sitemap.xml, and llms.txt are reachable.
-- Provides a free homepage snapshot and printable findings.
-- Focuses on actionable technical observations rather than guaranteed rankings or AI citations.
+## Service
+- Helps brands understand whether they appear in answers to buyer questions across selected AI answer experiences.
+- Maps citations and competitor mentions to identify credible sources and content gaps.
+- Recommends improvements to brand facts, useful pages, technical discoverability, structured data, and legitimate third-party visibility.
+- Uses a repeatable measure, improve, and re-measure workflow.
+- Does not guarantee rankings, mentions, citations, leads, or revenue.
 
-## Important limitations
-- A technical readiness scan does not query ChatGPT, Gemini, Perplexity, or other answer engines.
-- Detection of structured data does not confirm that the schema is valid.
-- Presence or absence of llms.txt is not a confirmed ranking factor.
-- No ranking, citation, or revenue outcome is guaranteed.
+## Free technical checker
+- Checks public homepage HTML for technical signals including title, meta description, H1 structure, canonical link, JSON-LD presence, indexing directives, image alt attributes, document language, Open Graph metadata, and whether robots.txt, sitemap.xml, and llms.txt are reachable.
+- The checker does not query ChatGPT, Gemini, Perplexity, or other answer engines and does not validate schema comprehensively.
 
 ## Website
 - Homepage: https://chatgptplayground.vercel.app/
-- Free homepage audit: https://chatgptplayground.vercel.app/#free-check
+- Free technical check: https://chatgptplayground.vercel.app/#free-check
+- AEO guide: https://chatgptplayground.vercel.app/aeo-guide
