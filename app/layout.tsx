@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import "./workspace-polish.css";
 import SiteNav from "./components/SiteNav";
 import SiteFooter from "./components/SiteFooter";
 import MotionEnhancer from "./components/MotionEnhancer";
