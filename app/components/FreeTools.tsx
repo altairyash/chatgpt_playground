@@ -5,6 +5,24 @@ import Link from "next/link";
 
 type ToolTab = "robots" | "llms" | "meta";
 
+function normalizeHttpUrl(raw: string): string | null {
+  try {
+    const url = new URL(raw.trim());
+    if ((url.protocol !== "https:" && url.protocol !== "http:") || url.username || url.password) return null;
+    return url.toString();
+  } catch {
+    return null;
+  }
+}
+
+function escapeHtml(value: string) {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
 function downloadText(filename: string, content: string, type = "text/plain") {
   const blob = new Blob([content], { type });
   const url = URL.createObjectURL(blob);
@@ -12,7 +30,7 @@ function downloadText(filename: string, content: string, type = "text/plain") {
   anchor.href = url;
   anchor.download = filename;
   anchor.click();
-  URL.revokeObjectURL(url);
+  window.setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
 export default function FreeTools() {
@@ -29,6 +47,11 @@ export default function FreeTools() {
   const [pageType, setPageType] = useState("website");
   const [pageUrls, setPageUrls] = useState("");
   const [copied, setCopied] = useState("");
+  const normalizedSitemap = sitemap.trim() ? normalizeHttpUrl(sitemap) : null;
+  const normalizedSiteUrl = normalizeHttpUrl(siteUrl);
+  const normalizedOgImage = ogImage.trim() ? normalizeHttpUrl(ogImage) : null;
+  const invalidPageUrlCount = pageUrls.split("\n").map((item) => item.trim()).filter(Boolean)
+    .filter((item) => !normalizeHttpUrl(item)).length;
 
   const robotsOutput = useMemo(() => {
     const lines: string[] = [];
@@ -44,14 +67,14 @@ export default function FreeTools() {
       }
       lines.push("", "# Review each provider's current crawler documentation before publishing.");
     }
-    if (sitemap.trim()) lines.push("", `Sitemap: ${sitemap.trim()}`);
+    if (normalizedSitemap) lines.push("", "Sitemap: " + normalizedSitemap);
     return lines.join("\n");
-  }, [robotsMode, sitemap, blockTraining]);
+  }, [robotsMode, normalizedSitemap, blockTraining]);
 
   const llmsOutput = useMemo(() => {
     const name = siteName.trim() || "Your site";
     const description = siteDescription.trim() || "Add a short, accurate description of this website.";
-    const urls = pageUrls.split("\n").map((item) => item.trim()).filter(Boolean);
+    const urls = pageUrls.split("\n").map((item) => normalizeHttpUrl(item.trim())).filter((item): item is string => Boolean(item));
     return [
       `# ${name}`,
       "",
@@ -65,30 +88,30 @@ export default function FreeTools() {
   }, [siteName, siteDescription, pageUrls]);
 
   const metaOutput = useMemo(() => {
-    const canonical = siteUrl.trim();
-    const title = pageTitle.trim();
-    const description = pageDescription.trim();
-    const image = ogImage.trim();
+    const canonical = normalizedSiteUrl;
+    const title = escapeHtml(pageTitle.trim() || "Your page title");
+    const description = escapeHtml(pageDescription.trim() || "Add a concise, accurate page description.");
+    const image = normalizedOgImage;
     return [
       "<!-- Basic metadata -->",
       `<title>${title}</title>`,
       `<meta name="description" content="${description}" />`,
       "",
       "<!-- Open Graph -->",
-      `<link rel="canonical" href="${canonical}" />`,
+      ...(canonical ? [`<link rel="canonical" href="${escapeHtml(canonical)}" />`] : ["<!-- Add a valid HTTP(S) page URL to include canonical and og:url tags. -->"]),
       '<meta property="og:type" content="' + pageType + '" />',
-      `<meta property="og:url" content="${canonical}" />`,
+      ...(canonical ? [`<meta property="og:url" content="${escapeHtml(canonical)}" />`] : []),
       `<meta property="og:title" content="${title}" />`,
       `<meta property="og:description" content="${description}" />`,
-      ...(image ? [`<meta property="og:image" content="${image}" />`] : []),
+      ...(image ? [`<meta property="og:image" content="${escapeHtml(image)}" />`] : []),
       "",
       "<!-- X / Twitter -->",
       '<meta name="twitter:card" content="summary_large_image" />',
       `<meta name="twitter:title" content="${title}" />`,
       `<meta name="twitter:description" content="${description}" />`,
-      ...(image ? [`<meta name="twitter:image" content="${image}" />`] : []),
+      ...(image ? [`<meta name="twitter:image" content="${escapeHtml(image)}" />`] : []),
     ].join("\n");
-  }, [siteUrl, pageTitle, pageDescription, ogImage, pageType]);
+  }, [normalizedSiteUrl, pageTitle, pageDescription, normalizedOgImage, pageType]);
 
   async function copyOutput(value: string, label: string) {
     try {
