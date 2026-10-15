@@ -3,6 +3,7 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
 import AuditTool from "./components/AuditTool";
+import Link from "next/link";
 
 type ResearchView = "questions" | "answers" | "sources";
 
@@ -74,20 +75,6 @@ export default function Home() {
 
   return (
     <main className="cg3">
-      <nav className="cg3-nav" aria-label="Main navigation">
-        <a className="cg3-brand" href="#top" aria-label="CiteGlance home">
-          <span className="cg3-brand-mark">c<span>.</span></span>
-          <span>CiteGlance</span>
-        </a>
-        <div className="cg3-nav-links">
-          <a href="#method">Method</a>
-          <a href="/free-tools">Free tools</a>
-          <a href="/pricing">Pricing</a>
-          <a href="/services">Services</a>
-        </div>
-        <a className="cg3-nav-cta" href="#offers">Explore the research <span aria-hidden="true">↗</span></a>
-      </nav>
-
       <section className="cg3-hero" id="top">
         <div className="cg3-hero-copy">
           <div className="cg3-eyebrow"><span className="cg3-eyebrow-dot" /> INDEPENDENT RESEARCH FOR B2B SOFTWARE</div>
@@ -152,7 +139,7 @@ export default function Home() {
           <span className="cg3-section-kicker">01 / THE WORK</span>
           <h2>A score won’t tell you <em>why.</em></h2>
           <p>Visibility research should leave you with more than a number. It should show what was tested, what was observed, where the answer got its information, and what deserves attention next.</p>
-          <a className="cg3-inline-link" href="/services">See what the sprint includes <span aria-hidden="true">↗</span></a>
+          <Link className="cg3-inline-link" href="/services">See what the sprint includes <span aria-hidden="true">↗</span></Link>
         </div>
         <div className="cg3-work-list">
           <article className="cg3-work-item">
@@ -185,7 +172,7 @@ export default function Home() {
           <h2>AI discovery is observable. <em>Not controllable.</em></h2>
           <p>Answers vary by model, prompt, market, and time. We report what we can observe, make the method explicit, and never promise rankings, mentions, citations, leads, or revenue.</p>
         </div>
-        <a href="/aeo-guide" aria-label="Read our practical AEO guide">Read the guide <span aria-hidden="true">↗</span></a>
+        <Link href="/aeo-guide" aria-label="Read our practical AEO guide">Read the guide <span aria-hidden="true">↗</span></Link>
       </section>
 
       <section className="cg3-offers" id="offers">
@@ -226,12 +213,12 @@ export default function Home() {
         <p className="cg3-scope-note">The snapshot is an early-access pilot. Platform access and reproducibility vary. The scope, method, evidence format, and delivery timing are agreed before work begins.</p>
       </section>
 
-      <section className="cg3-free-check">
+      <section className="cg3-free-check" id="free-check">
         <div className="cg3-free-copy">
           <span className="cg3-section-kicker">03 / FREE, SELF-SERVE</span>
           <h2>Not ready for a study? <em>Start with your site.</em></h2>
           <p>Run a free homepage readiness check or generate basic discovery files. These tools examine technical signals; they do not query AI engines or predict rankings.</p>
-          <a className="cg3-inline-link" href="/free-tools">Open all free tools <span aria-hidden="true">↗</span></a>
+          <Link className="cg3-inline-link" href="/free-tools">Open all free tools <span aria-hidden="true">↗</span></Link>
           <div className="cg3-free-list"><span>robots.txt builder</span><span>llms.txt starter</span><span>Open Graph generator</span></div>
         </div>
         <div className="cg3-tool-wrap"><AuditTool /></div>
@@ -280,13 +267,6 @@ export default function Home() {
           <details><summary>Do you fabricate reviews or third-party mentions?</summary><p>No. The work focuses on accurate company facts, useful content, technical clarity, and legitimate external sources—not fake reviews or spam.</p></details>
         </div>
       </section>
-
-      <footer className="cg3-footer">
-        <a className="cg3-brand" href="#top"><span className="cg3-brand-mark">c<span>.</span></span><span>CiteGlance</span></a>
-        <div className="cg3-footer-links"><a href="/services">Services</a><a href="/pricing">Pricing</a><a href="/free-tools">Free tools</a><a href="/aeo-guide">AEO guide</a></div>
-        <p>Evidence-led AI buyer visibility research. No ranking guarantees.</p>
-        <span>© {new Date().getFullYear()} CiteGlance</span>
-      </footer>
     </main>
   );
 }
