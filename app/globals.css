@@ -116,3 +116,24 @@ h1 em,h2 em{font-style:normal;color:#77894f}
   .audit-result-actions{display:none!important}
   .audit-result-kicker{color:#555!important}
 }
+
+
+/* AEO guide content */
+.guide-article{max-width:850px;padding-top:78px;padding-bottom:90px}
+.guide-article h1{font-size:clamp(42px,6vw,68px);line-height:1.08;max-width:850px;margin:24px 0}
+.guide-article h1 em{color:#77894f}
+.guide-lede{font-size:18px;line-height:1.8;color:#545d68;max-width:760px}
+.guide-updated{font:10px 'DM Mono',monospace;letter-spacing:.4px;color:#858c83;margin:24px 0 52px}
+.guide-section{padding:32px 0;border-top:1px solid var(--line)}
+.guide-section h2,.guide-cta h2{font:600 clamp(27px,3.5vw,38px)/1.2 Manrope,sans-serif;letter-spacing:-1.5px;margin:0 0 18px}
+.guide-section>p,.guide-check p,.guide-cta p{font-size:14px;line-height:1.85;color:#636c76;max-width:780px}
+.guide-checklist{border-top:1px solid var(--line);margin-top:24px}
+.guide-check{display:grid;grid-template-columns:45px 1fr;gap:16px;padding:22px 0;border-bottom:1px solid var(--line)}
+.guide-number{font:11px 'DM Mono',monospace;color:#7b895d;padding-top:3px}
+.guide-check h3{font-size:15px;margin:0 0 8px}
+.guide-check p{margin:0}
+.guide-cta{margin-top:35px;padding:32px;background:#eceee5;border-radius:12px}
+.guide-cta .eyebrow{margin-bottom:15px}
+.guide-cta h2{margin-bottom:12px}
+.guide-cta p{margin-bottom:22px}
+@media(max-width:640px){.guide-article{padding-top:52px;padding-bottom:65px}.guide-article h1{font-size:43px;letter-spacing:-2px}.guide-lede{font-size:15px}.guide-section{padding:26px 0}.guide-cta{padding:23px}.guide-check{grid-template-columns:30px 1fr;gap:10px}}
