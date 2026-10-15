@@ -1,0 +1,19 @@
+# Signal Audit
+
+> Signal Audit provides practical website diagnostics for Answer Engine Optimization (AEO) and AI search readiness.
+
+## What it does
+- Checks public homepage HTML for technical signals including title, meta description, H1 structure, canonical link, JSON-LD presence, indexing directives, image alt attributes, and document language.
+- Checks whether standard public files such as robots.txt, sitemap.xml, and llms.txt are reachable.
+- Provides a free homepage snapshot and printable findings.
+- Focuses on actionable technical observations rather than guaranteed rankings or AI citations.
+
+## Important limitations
+- A technical readiness scan does not query ChatGPT, Gemini, Perplexity, or other answer engines.
+- Detection of structured data does not confirm that the schema is valid.
+- Presence or absence of llms.txt is not a confirmed ranking factor.
+- No ranking, citation, or revenue outcome is guaranteed.
+
+## Website
+- Homepage: https://chatgptplayground.vercel.app/
+- Free homepage audit: https://chatgptplayground.vercel.app/#free-check
