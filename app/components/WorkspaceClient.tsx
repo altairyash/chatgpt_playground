@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { TabsRoot, TabsList, TabsTrigger, TabsContent } from "./ui/Tabs";
 
 type RunKind = "baseline" | "recheck";
 type Platform = "ChatGPT" | "Gemini" | "Perplexity" | "Other";
@@ -407,13 +408,14 @@ export default function WorkspaceClient() {
         {pageError && <div className="cg-work-feedback cg-work-error" role="alert">{pageError}</div>}
         {notice && <div className="cg-work-feedback" role="status">{notice}</div>}
 
-        <nav className="cg-work-stage-nav" aria-label="Workspace stages">
-          <button type="button" className={stage === "research" ? "is-active" : ""} onClick={function () { setStage("research"); }}> <span>01</span> Research answers</button>
-          <button type="button" className={stage === "content" ? "is-active" : ""} onClick={function () { setStage("content"); }}> <span>02</span> Create content</button>
-          <button type="button" className={stage === "measure" ? "is-active" : ""} onClick={function () { setStage("measure"); }}> <span>03</span> Recheck impact</button>
-        </nav>
+        <TabsRoot value={stage} onValueChange={(value) => setStage(value as "research" | "content" | "measure")} className="cg21-tabs-root cg-work-stage-tabs">
+          <TabsList className="cg-work-stage-nav" aria-label="Workspace stages">
+            <TabsTrigger value="research" className="cg-work-stage-trigger"><span>01</span> Research answers</TabsTrigger>
+            <TabsTrigger value="content" className="cg-work-stage-trigger"><span>02</span> Create content</TabsTrigger>
+            <TabsTrigger value="measure" className="cg-work-stage-trigger"><span>03</span> Recheck impact</TabsTrigger>
+          </TabsList>
 
-        {stage === "research" && (
+          <TabsContent value="research" className="cg-work-stage-content">
           <div className="cg-work-main-grid">
             <div className="cg-work-stack">
               <section className="cg-work-panel">
@@ -496,9 +498,9 @@ export default function WorkspaceClient() {
               </section>
             </aside>
           </div>
-        )}
+        </TabsContent>
 
-        {stage === "content" && (
+          <TabsContent value="content" className="cg-work-stage-content">
           <div className="cg-work-content-layout">
             <section className="cg-work-panel cg-work-content-controls">
               <div className="cg-work-eyebrow">EVIDENCE-LED CONTENT STUDIO</div>
@@ -548,9 +550,9 @@ export default function WorkspaceClient() {
               }) : <div className="cg-work-empty"><p>Save a generated draft to keep it here for editing and export.</p></div>}
             </section>
           </div>
-        )}
+        </TabsContent>
 
-        {stage === "measure" && (
+          <TabsContent value="measure" className="cg-work-stage-content">
           <div className="cg-work-measure-layout">
             <section className="cg-work-panel">
               <div className="cg-work-section-head"><div><div className="cg-work-eyebrow">BASELINE VS RECHECK</div><h2>Did visibility change?</h2></div><button type="button" className="cg-work-button cg-work-button-dark" onClick={function () { startRun("recheck"); }}>Start another recheck ↻</button></div>
@@ -574,7 +576,8 @@ export default function WorkspaceClient() {
               }) : <div className="cg-work-empty"><p>No research sessions saved yet.</p></div>}
             </section>
           </div>
-        )}
+          </TabsContent>
+        </TabsRoot>
 
         <footer className="cg-work-footer">
           <p><strong>Evidence policy:</strong> CiteGlance stores observations you enter. It does not automatically query AI engines, guarantee citation changes, or publish posts on your behalf in this first workspace version.</p>
