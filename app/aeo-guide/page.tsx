@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "AEO: A Practical Guide to AI Search Readiness | Signal Audit",
@@ -24,8 +25,8 @@ export default function AeoGuidePage() {
   return (
     <main>
       <nav className="nav shell">
-        <a className="brand" href="/" aria-label="Signal Audit home"><span className="brand-mark">S</span><span>signal<span className="brand-light">audit</span></span></a>
-        <a className="nav-link" href="/#free-check">Free AEO check <span aria-hidden="true">↗</span></a>
+        <Link className="brand" href="/" aria-label="Signal Audit home"><span className="brand-mark">S</span><span>signal<span className="brand-light">audit</span></span></Link>
+        <Link className="nav-link" href="/#free-check">Free AEO check <span aria-hidden="true">↗</span></Link>
       </nav>
       <article className="shell guide-article">
         <div className="eyebrow">THE PRACTICAL GUIDE · AEO</div>
@@ -59,12 +60,12 @@ export default function AeoGuidePage() {
 
         <section className="guide-cta">
           <div className="eyebrow">START WITH THE BASICS</div>
-          <h2>Check your site's technical signals.</h2>
+          <h2>Check your site&apos;s technical signals.</h2>
           <p>Run a free homepage snapshot for metadata, crawlability, structured-data presence, and standard discovery files. It does not query AI engines or promise rankings.</p>
-          <a className="button button-primary" href="/#free-check">Run the free AEO check <span aria-hidden="true">↗</span></a>
+          <Link className="button button-primary" href="/#free-check">Run the free AEO check <span aria-hidden="true">↗</span></Link>
         </section>
       </article>
-      <footer className="footer"><div className="shell footer-inner"><a className="brand" href="/"><span className="brand-mark">S</span><span>signal<span className="brand-light">audit</span></span></a><span>Practical website diagnostics. Honest recommendations.</span><span>© {new Date().getFullYear()} Signal Audit</span></div></footer>
+      <footer className="footer"><div className="shell footer-inner"><Link className="brand" href="/"><span className="brand-mark">S</span><span>signal<span className="brand-light">audit</span></span></Link><span>Practical website diagnostics. Honest recommendations.</span><span>© {new Date().getFullYear()} Signal Audit</span></div></footer>
     </main>
   );
 }
