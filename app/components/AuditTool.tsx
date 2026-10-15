@@ -55,7 +55,7 @@ export default function AuditTool() {
               <input id="free-audit-url" type="text" inputMode="url" autoComplete="url" placeholder="example.com" value={url} onChange={(event) => setUrl(event.target.value)} required />
               <button type="submit" disabled={loading}>{loading ? "Checking…" : "Check site ↗"}</button>
             </div>
-            <p className="free-audit-small">We inspect the homepage HTML only. Please only submit sites you’re authorized to test.</p>
+            <p className="free-audit-small">We inspect the public homepage HTML only. When AI recommendations are enabled, the submitted URL, a short text excerpt, and technical checks are sent to OpenAI to generate suggestions. No contact-form details are sent.</p>
           </form>
           {error && <p className="audit-error" role="alert">{error}</p>}
           {result && (
