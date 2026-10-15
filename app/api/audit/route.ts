@@ -108,6 +108,29 @@ export async function POST(request: NextRequest) {
     const missingAlt = images.filter((match) => !/\balt\s*=\s*["'][^"']*["']/i.test(match[1])).length;
     const hasLang = /<html\b[^>]*\blang\s*=/i.test(html);
     const pageUrl = response.url || url.toString();
+    const origin = new URL(pageUrl);
+    async function probe(path: string) {
+      const target = new URL(path, origin);
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 2200);
+      try {
+        const probeResponse = await fetch(target, {
+          method: "GET",
+          redirect: "error",
+          signal: controller.signal,
+          headers: { "user-agent": "SignalAuditBot/1.0 (+public AEO readiness check)" },
+        });
+        await probeResponse.body?.cancel().catch(() => undefined);
+        return { ok: probeResponse.ok, status: probeResponse.status };
+      } catch {
+        return { ok: false, status: 0 };
+      } finally {
+        clearTimeout(timer);
+      }
+    }
+    const [robotsProbe, sitemapProbe, llmsProbe] = await Promise.all([
+      probe("/robots.txt"), probe("/sitemap.xml"), probe("/llms.txt"),
+    ]);
     const checks = [
       check("Page is reachable", true, `Homepage returned HTTP ${response.status}.`),
       check("Page title", Boolean(title), title ? `Found “${title.slice(0, 140)}” (${title.length} characters).` : "No HTML title was detected."),
@@ -118,13 +141,17 @@ export async function POST(request: NextRequest) {
       check("Indexing directives", !noindex, noindex ? "A noindex directive was detected; confirm this page is meant to stay out of search results." : "No noindex directive was detected in the inspected HTML or response header."),
       check("Image alternative text", missingAlt === 0, images.length ? (missingAlt ? `${missingAlt} of ${images.length} image tags lack an explicit alt attribute.` : `${images.length} image tags have an alt attribute.`) : "No standard img tags were detected in the returned HTML."),
       check("Document language", hasLang, hasLang ? "The HTML element declares a language." : "The HTML element has no lang attribute in the returned HTML."),
+      check("Open Graph metadata", /<meta\\b[^>]*property\\s*=\\s*["']og:title["']/i.test(html) && /<meta\\b[^>]*property\\s*=\\s*["']og:description["']/i.test(html), "Open Graph title and description help platforms interpret and preview the page; this is a supporting signal, not a ranking guarantee."),
+      check("Robots.txt", robotsProbe.ok, robotsProbe.ok ? "robots.txt is reachable. Its directives were not deeply validated." : "robots.txt was not reachable at the standard path; confirm crawler rules are intentionally configured."),
+      check("XML sitemap", sitemapProbe.ok, sitemapProbe.ok ? "sitemap.xml is reachable. Its URLs and freshness were not validated." : "sitemap.xml was not reachable at the standard path; confirm a sitemap exists and is submitted where appropriate."),
+      check("llms.txt discovery file", llmsProbe.ok, llmsProbe.ok ? "llms.txt is reachable. This emerging convention is not a confirmed requirement for AI visibility." : "No reachable llms.txt was detected at the standard path. Consider one as optional documentation, not a guaranteed ranking lever."),
     ];
     return NextResponse.json({
       url: pageUrl,
       checkedAt: new Date().toISOString(),
       score: Math.round(checks.filter((item) => item.status === "pass").length / checks.length * 100),
       checks,
-      note: "Homepage-only snapshot of returned HTML. This does not crawl the whole site, validate schema, or predict search rankings or AI citations.",
+      note: "AEO readiness snapshot based on homepage HTML and a few standard public files. It does not query AI answer engines, measure brand mentions, validate schema, crawl the whole site, or predict rankings/citations.",
     }, { headers: { "Cache-Control": "no-store" } });
   } catch (error) {
     const message = error instanceof Error ? error.message : "The audit could not be completed.";
