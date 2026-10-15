@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "AEO: A Practical Guide to AI Search Readiness | Signal Audit",
+  title: "AEO: A Practical Guide to AI Search Readiness | AEO Studio",
   description: "Learn what answer engine optimization can and cannot do, which technical signals to check, and how to measure whether AI search visibility is improving.",
   alternates: { canonical: "/aeo-guide" },
   openGraph: {
@@ -25,14 +25,14 @@ export default function AeoGuidePage() {
   return (
     <main>
       <nav className="nav shell">
-        <Link className="brand" href="/" aria-label="Signal Audit home"><span className="brand-mark">S</span><span>signal<span className="brand-light">audit</span></span></Link>
+        <Link className="brand" href="/" aria-label="AEO Studio home"><span className="brand-mark">A</span><span>AEO<span className="brand-light"> studio</span></span></Link>
         <Link className="nav-link" href="/#free-check">Free AEO check <span aria-hidden="true">↗</span></Link>
       </nav>
       <article className="shell guide-article">
         <div className="eyebrow">THE PRACTICAL GUIDE · AEO</div>
         <h1>Make your brand easier for answer engines to <em>understand.</em></h1>
         <p className="guide-lede">Answer Engine Optimization (AEO) is the work of making information about a brand useful, accessible, and clear enough that search and AI answer systems can discover it, interpret it, and potentially cite it. It is not a secret switch that guarantees a recommendation.</p>
-        <p className="guide-updated">A practical framework from Signal Audit · Updated October 2026</p>
+        <p className="guide-updated">A practical framework from AEO Studio · Updated October 2026</p>
 
         <section className="guide-section">
           <h2>SEO and AEO are related, not interchangeable</h2>
@@ -65,7 +65,7 @@ export default function AeoGuidePage() {
           <Link className="button button-primary" href="/#free-check">Run the free AEO check <span aria-hidden="true">↗</span></Link>
         </section>
       </article>
-      <footer className="footer"><div className="shell footer-inner"><Link className="brand" href="/"><span className="brand-mark">S</span><span>signal<span className="brand-light">audit</span></span></Link><span>Practical website diagnostics. Honest recommendations.</span><span>© {new Date().getFullYear()} Signal Audit</span></div></footer>
+      <footer className="footer"><div className="shell footer-inner"><Link className="brand" href="/"><span className="brand-mark">A</span><span>AEO<span className="brand-light"> studio</span></span></Link><span>Useful evidence. Practical improvements. No ranking guarantees.</span><span>© {new Date().getFullYear()} AEO Studio</span></div></footer>
     </main>
   );
 }
