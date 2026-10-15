@@ -1,5 +1,9 @@
 "use client";
 
+// Adapted from Origin UI’s rounded Tabs example on 21st.dev:
+// https://21st.dev/@originui/components/tabs/rounded
+// Uses Radix tabs behavior with CiteGlance-owned styling for consistency across routes.
+
 import * as React from "react";
 import * as TabsPrimitive from "@radix-ui/react-tabs";
 
