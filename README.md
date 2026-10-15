@@ -1,33 +1,27 @@
-# AI Search Readiness Audit
+# Signal Audit — Next.js
 
-A practical technical audit for small-business websites that want their content to be easier for search engines and AI answer systems to understand.
+A responsive landing page for a practical website search-readiness audit service. The Python prototype (`audit.py`) remains in the repository.
 
-## What the service delivers
+## Deploy to Vercel
 
-- Crawl a public website and identify indexability and metadata issues
-- Check titles, descriptions, canonical URLs, robots directives, sitemap and structured data
-- Flag missing or invalid JSON-LD opportunities
-- Produce a prioritized, plain-English report with concrete fixes
-- No promises of rankings, citations, or AI visibility
+1. Open [Vercel](https://vercel.com/new) and import this GitHub repository.
+2. Set the production branch to `main` and choose the **Next.js** framework preset.
+3. Keep the default install/build settings (`npm install`, `npm run build`).
+4. In Vercel → Project Settings → Environment Variables, add `NEXT_PUBLIC_CONTACT_EMAIL` with the email address that should receive audit requests.
+5. Deploy. New commits to `main` should automatically trigger production deployments.
 
-## Starter offer
+## Run locally
 
-**Website AI/Search Readiness Audit — introductory price: ₹4,999**
+Requires Node.js 20 or newer.
 
-Includes one public domain, a prioritized findings report, and a short handover. Price and scope should be confirmed with each buyer before accepting a project.
+```bash
+npm install
+npm run dev
+```
 
-## Status
+## Before accepting customers
 
-Early service prototype. The audit should be reviewed by a human before client delivery. Do not enter credentials or crawl websites without permission. Respect robots.txt, rate limits, site terms, and applicable laws.
-
-## Roadmap
-
-- [ ] Build a conservative public-page crawler
-- [ ] Check basic technical SEO signals and JSON-LD
-- [ ] Generate a Markdown report
-- [ ] Add sample output using a site we own or have permission to test
-- [ ] Publish a service landing page and clear terms/privacy/refund details before accepting payments
-
-## Important
-
-This is a technical checklist, not a guarantee of performance in Google, ChatGPT, or any other search or answer engine.
+- The request form opens a prefilled email only if `NEXT_PUBLIC_CONTACT_EMAIL` is configured. It does not store submissions or send email from a server.
+- The displayed ₹4,999 is a proposed starting price, not a payment checkout. Confirm scope with the customer before taking payment.
+- The Python audit prototype is local-only and is not exposed as a public API by this Next.js app.
+- This service offers technical observations and recommendations; it does not guarantee rankings or AI-answer visibility.
