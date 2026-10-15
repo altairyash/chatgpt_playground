@@ -9,6 +9,7 @@ const primaryLinks = [
   { label: "Free tools", path: "/free-tools", activePath: "/free-tools" },
   { label: "Pricing", path: "/pricing", activePath: "/pricing" },
   { label: "Services", path: "/services", activePath: "/services" },
+  { label: "Workspace", path: "/workspace", activePath: "/workspace" },
 ];
 
 export default function SiteNav() {
