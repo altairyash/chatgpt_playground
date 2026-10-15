@@ -36,9 +36,9 @@ export default function AuditTool() {
     <section className="free-audit-section" id="free-check">
       <div className="shell free-audit-grid">
         <div className="free-audit-copy">
-          <div className="eyebrow">TRY IT ON A REAL WEBSITE</div>
-          <h2>Start with a free<br /><em>homepage check.</em></h2>
-          <p>Enter a public URL to check a handful of technical signals. You’ll see actual findings from the page — not a made-up demo score.</p>
+          <div className="eyebrow">FREE AEO READINESS CHECK</div>
+          <h2>Check your site's<br /><em>AI search readiness.</em></h2>
+          <p>Check technical signals that may help answer engines discover and interpret your site. This is a readiness snapshot, not a live ranking test.</p>
           <div className="free-audit-points"><span>✓ No account required</span><span>✓ No payment required</span><span>✓ Results in seconds</span></div>
         </div>
         <div className="free-audit-panel">
@@ -54,7 +54,7 @@ export default function AuditTool() {
           {result && (
             <div className="audit-results" aria-live="polite">
               <div className="audit-result-head">
-                <div><span className="audit-result-kicker">HOMEPAGE SNAPSHOT</span><strong>{new URL(result.url).hostname}</strong></div>
+                <div><span className="audit-result-kicker">AEO READINESS SNAPSHOT</span><strong>{new URL(result.url).hostname}</strong></div>
                 <div className="audit-score"><b>{result.score}</b><span>/ 100 signals</span></div>
               </div>
               <div className="audit-result-list">
@@ -66,7 +66,7 @@ export default function AuditTool() {
                 ))}
               </div>
               <p className="audit-result-note">{result.note}</p>
-              <div className="audit-result-actions"><button type="button" className="audit-download-button" onClick={() => window.print()}>Save report as PDF ↗</button><a className="audit-upgrade-link" href={`#request`} onClick={() => setUrl(result.url)}>Want a deeper, prioritized review? Request a paid audit ↓</a></div>
+              <div className="audit-result-actions"><button type="button" className="audit-download-button" onClick={() => window.print()}>Save report as PDF ↗</button><a className="audit-upgrade-link" href={`#request`} onClick={() => setUrl(result.url)}>Need help prioritizing AEO improvements? Request a review ↓</a></div>
             </div>
           )}
         </div>
