@@ -216,3 +216,29 @@ h1 em,h2 em{font-style:normal;color:#77894f}
 .free-tools-next-actions{display:flex;flex-direction:column;align-items:flex-start;gap:18px}
 @media(max-width:760px){.free-tools-hero{padding:60px 0 38px}.free-tools-columns{grid-template-columns:1fr}.free-tools-fields{border-right:0;border-bottom:1px solid #e9ece5;padding:23px}.free-tools-output{padding:23px}.free-tools-output pre{min-height:180px}.free-tools-next{grid-template-columns:1fr;gap:15px;padding:65px 0}.free-tools-tabs button{font-size:10px;padding:14px 6px}}
 @media(max-width:480px){.free-tools-hero h1{font-size:42px;letter-spacing:-2px}.free-tools-pills span{font-size:9px}.free-tools-output-head{align-items:flex-start;flex-direction:column}.free-tools-nav .aeonav-links{gap:8px}.free-tools-nav .button{min-height:38px;padding:0 10px;font-size:10px}}
+
+
+/* Transparent pricing and low-friction pilot */
+.pricing-hero{padding-top:78px;padding-bottom:45px;max-width:950px}
+.pricing-hero h1{font-size:clamp(42px,5.6vw,65px);line-height:1.08;margin:22px 0}
+.pricing-hero h1 em{font-style:normal;color:#78894f}
+.pricing-hero>p{font-size:15px;line-height:1.85;color:#6c747d;max-width:740px}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;padding-bottom:45px}
+.pricing-card{position:relative;background:#fff;border:1px solid #e2e6dc;border-radius:12px;padding:27px;display:flex;flex-direction:column;min-width:0}
+.pricing-featured{border-color:#a8bb82;box-shadow:0 15px 45px #2b35160d}
+.pricing-pilot-label{font:9px 'DM Mono',monospace;letter-spacing:.6px;color:#607747;background:#eef3e5;border-radius:4px;padding:7px 8px;align-self:flex-start;margin-bottom:16px}
+.pricing-card h2{font:700 18px/1.3 Manrope,sans-serif;letter-spacing:-.5px;margin:0 0 20px}
+.pricing-price{font:700 34px/1 Manrope,sans-serif;letter-spacing:-1.3px}
+.pricing-price span{display:block;font:11px 'DM Sans',sans-serif;letter-spacing:0;color:#858d83;margin-top:9px}
+.pricing-description{font-size:12px;line-height:1.7;color:#737b74;min-height:61px;margin:20px 0}
+.pricing-card ul{list-style:none;margin:0 0 27px;padding:0;border-top:1px solid #edf0e9;flex:1}
+.pricing-card li{display:flex;gap:9px;align-items:flex-start;padding:11px 0;border-bottom:1px solid #edf0e9;font-size:11px;line-height:1.55;color:#555f55}
+.pricing-card li span{color:#6c8b4e;font-weight:700}
+.pricing-cta{width:100%;min-height:46px;margin-top:auto;font-size:11px}
+.pricing-secondary{border:1px solid #dfe3d9;background:#f8f9f5;color:#22291f}
+.pricing-secondary span{color:#70844f}
+.pricing-notes{max-width:850px;padding:30px 0 90px}
+.pricing-notes h2{font:700 20px Manrope,sans-serif;letter-spacing:-.5px}
+.pricing-notes p{font-size:12px;line-height:1.8;color:#727a73}
+@media(max-width:850px){.pricing-grid{grid-template-columns:1fr 1fr}.pricing-card:last-child{grid-column:span 2}}
+@media(max-width:560px){.pricing-hero{padding-top:55px}.pricing-hero h1{font-size:43px;letter-spacing:-2px}.pricing-grid{grid-template-columns:1fr}.pricing-card:last-child{grid-column:auto}.pricing-card{padding:23px}.pricing-description{min-height:0}}
