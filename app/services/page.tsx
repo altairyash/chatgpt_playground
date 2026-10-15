@@ -11,7 +11,7 @@ export default function ServicesPage() {
   return (
     <main>
       <nav className="nav shell">
-        <Link className="brand" href="/">AEO<span className="brand-light"> studio</span></Link>
+        <Link className="brand" href="/">Cite<span className="brand-light">Glance</span></Link>
         <Link className="nav-link" href="/#assessment">Request an assessment ↗</Link>
       </nav>
       <article className="shell guide-article">
@@ -35,7 +35,7 @@ export default function ServicesPage() {
           <p>Implementation, repeat measurement, and monthly monitoring can be separately scoped and quoted after the initial study. No fake reviews, paid-for undisclosed mentions, or fabricated visibility data. We do not sell fake reviews, spammy placements, or fabricated visibility reports.</p>
         </section>
       </article>
-      <footer className="footer"><div className="shell footer-inner"><Link className="brand" href="/">AEO<span className="brand-light"> studio</span></Link><span>Useful evidence. Practical improvements. No ranking guarantees.</span><span>© {new Date().getFullYear()} CiteGlance</span></div></footer>
+      <footer className="footer"><div className="shell footer-inner"><Link className="brand" href="/">Cite<span className="brand-light">Glance</span></Link><span>Useful evidence. Practical improvements. No ranking guarantees.</span><span>© {new Date().getFullYear()} CiteGlance</span></div></footer>
     </main>
   );
 }
