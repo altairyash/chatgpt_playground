@@ -142,11 +142,11 @@ export default function FreeTools() {
       <section className="free-tools-workbench" aria-label="Free website tools">
         <TabsRoot value={active} onValueChange={(value) => { setActive(value as ToolTab); setCopied(""); }} className="cg21-tabs-root">
           <TabsList className="free-tools-tabs" aria-label="Choose a tool">
-            <TabsTrigger id="free-tools-tab-robots" value="robots">robots.txt builder</TabsTrigger>
-            <TabsTrigger id="free-tools-tab-llms" value="llms">llms.txt starter</TabsTrigger>
-            <TabsTrigger id="free-tools-tab-meta" value="meta">Open Graph tags</TabsTrigger>
+            <TabsTrigger value="robots">robots.txt builder</TabsTrigger>
+            <TabsTrigger value="llms">llms.txt starter</TabsTrigger>
+            <TabsTrigger value="meta">Open Graph tags</TabsTrigger>
           </TabsList>
-          <TabsContent value={active} key={active} id="free-tools-panel" tabIndex={0}> 
+          <TabsContent value={active} key={active} tabIndex={0}> 
             <div className="free-tools-columns">
           <div className="free-tools-fields">
             {active === "robots" && <>
