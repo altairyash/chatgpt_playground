@@ -1,8 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import type { KeyboardEvent } from "react";
 import Link from "next/link";
+import { TabsRoot, TabsList, TabsTrigger, TabsContent } from "./ui/Tabs";
 
 type ToolTab = "robots" | "llms" | "meta";
 const toolTabs: ToolTab[] = ["robots", "llms", "meta"];
@@ -130,21 +130,6 @@ export default function FreeTools() {
 
   const output = active === "robots" ? robotsOutput : active === "llms" ? llmsOutput : metaOutput;
 
-  function handleTabKeyDown(event: KeyboardEvent<HTMLButtonElement>) {
-    const currentIndex = toolTabs.indexOf(active);
-    let nextIndex = currentIndex;
-    if (event.key === "ArrowRight") nextIndex = (currentIndex + 1) % toolTabs.length;
-    else if (event.key === "ArrowLeft") nextIndex = (currentIndex - 1 + toolTabs.length) % toolTabs.length;
-    else if (event.key === "Home") nextIndex = 0;
-    else if (event.key === "End") nextIndex = toolTabs.length - 1;
-    else return;
-    event.preventDefault();
-    const next = toolTabs[nextIndex];
-    setActive(next);
-    setCopied("");
-    window.requestAnimationFrame(() => document.getElementById("free-tools-tab-" + next)?.focus());
-  }
-
   return (
     <main className="cg4-inner cg4-free-tools-page">
       <div className="shell">
@@ -156,12 +141,14 @@ export default function FreeTools() {
       </header>
 
       <section className="free-tools-workbench" aria-label="Free website tools">
-        <div className="free-tools-tabs" role="tablist" aria-label="Choose a tool">
-          <button id="free-tools-tab-robots" type="button" role="tab" aria-controls="free-tools-panel" aria-selected={active === "robots"} tabIndex={active === "robots" ? 0 : -1} className={active === "robots" ? "active" : ""} onKeyDown={handleTabKeyDown} onClick={() => { setActive("robots"); setCopied(""); }}>robots.txt builder</button>
-          <button id="free-tools-tab-llms" type="button" role="tab" aria-controls="free-tools-panel" aria-selected={active === "llms"} tabIndex={active === "llms" ? 0 : -1} className={active === "llms" ? "active" : ""} onKeyDown={handleTabKeyDown} onClick={() => { setActive("llms"); setCopied(""); }}>llms.txt starter</button>
-          <button id="free-tools-tab-meta" type="button" role="tab" aria-controls="free-tools-panel" aria-selected={active === "meta"} tabIndex={active === "meta" ? 0 : -1} className={active === "meta" ? "active" : ""} onKeyDown={handleTabKeyDown} onClick={() => { setActive("meta"); setCopied(""); }}>Open Graph tags</button>
-        </div>
-        <div key={active} id="free-tools-panel" role="tabpanel" aria-labelledby={"free-tools-tab-" + active} tabIndex={0} className="free-tools-columns">
+        <TabsRoot value={active} onValueChange={(value) => { setActive(value as ToolTab); setCopied(""); }} className="cg21-tabs-root">
+          <TabsList className="free-tools-tabs" aria-label="Choose a tool">
+            <TabsTrigger id="free-tools-tab-robots" value="robots">robots.txt builder</TabsTrigger>
+            <TabsTrigger id="free-tools-tab-llms" value="llms">llms.txt starter</TabsTrigger>
+            <TabsTrigger id="free-tools-tab-meta" value="meta">Open Graph tags</TabsTrigger>
+          </TabsList>
+          <TabsContent value={active} key={active} id="free-tools-panel" tabIndex={0}> 
+            <div className="free-tools-columns">
           <div className="free-tools-fields">
             {active === "robots" && <>
               <h2>Build your robots.txt</h2>
@@ -204,8 +191,9 @@ export default function FreeTools() {
               <button type="button" onClick={() => downloadText(active === "robots" ? "robots.txt" : active === "llms" ? "llms.txt" : "meta-tags.html", output, active === "meta" ? "text/html" : "text/plain")}>Download file</button>
             </div>
             {copied && <p className="free-tools-copied" role="status">{copied}</p>}
-          </div>
-        </div>
+            </div>
+          </TabsContent>
+        </TabsRoot>
       </section>
 
       <section className="free-tools-next">
