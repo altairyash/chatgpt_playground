@@ -11,7 +11,8 @@
   "dependencies": {
     "next": "15.5.9",
     "react": "19.1.2",
-    "react-dom": "19.1.2"
+    "react-dom": "19.1.2",
+    "@radix-ui/react-tabs": "^1.1.12"
   },
   "devDependencies": {
     "@types/node": "^22.15.30",
