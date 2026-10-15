@@ -117,7 +117,7 @@ export default function FreeTools() {
           <button type="button" role="tab" aria-selected={active === "llms"} className={active === "llms" ? "active" : ""} onClick={() => { setActive("llms"); setCopied(""); }}>llms.txt starter</button>
           <button type="button" role="tab" aria-selected={active === "meta"} className={active === "meta" ? "active" : ""} onClick={() => { setActive("meta"); setCopied(""); }}>Open Graph tags</button>
         </div>
-        <div className="free-tools-columns">
+        <div key={active} className="free-tools-columns">
           <div className="free-tools-fields">
             {active === "robots" && <>
               <h2>Build your robots.txt</h2>
