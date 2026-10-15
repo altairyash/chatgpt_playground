@@ -79,7 +79,7 @@ export default function Home() {
       <AuditTool />
 
       <section className="request-section shell" id="assessment">
-        <div className="request-copy"><div className="eyebrow">START WITH YOUR BRAND</div><h2>Find your biggest<br /><em>AI visibility gaps.</em></h2><p>Tell us your website and the outcome you want. The first step is a scoped baseline and a clear explanation of what can—and cannot—be measured for your category.</p><div className="price-note"><span className="price-dot" /><span><strong>Initial AEO baseline</strong><small>Scope and price confirmed before any paid work</small></span></div></div>
+        <div className="request-copy"><div className="eyebrow">START WITH YOUR BRAND</div><h2>Find your biggest<br /><em>AI visibility gaps.</em></h2><p>Tell us your website and the outcome you want. The first step is a scoped baseline and a clear explanation of what can—and cannot—be measured for your category.</p><div className="price-note"><span className="price-dot" /><span><strong>Foundations Sprint · ₹4,999 one-time pilot</strong><small>One brand, one website, prioritized 30-day action plan</small></span></div></div>
         <form className="request-form" onSubmit={submitLead}>
           <div className="form-top"><span className="form-icon">↗</span><div><strong>Request an AI visibility assessment</strong><small>Tell us what you want to improve</small></div></div>
           <label htmlFor="site-url">Website URL</label><input id="site-url" type="url" placeholder="https://yourbrand.com" value={website} onChange={(e) => setWebsite(e.target.value)} required />
