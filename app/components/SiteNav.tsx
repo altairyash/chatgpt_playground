@@ -40,15 +40,18 @@ export default function SiteNav() {
           <span>CiteGlance</span>
         </Link>
 
-        <div className={menuOpen ? "cg3-nav-links is-open" : "cg3-nav-links"}>
-          <div className="cg4-mobile-menu-inner">
-        {primaryLinks.map((item) => {
+        <div className="cg3-nav-links">
+          {primaryLinks.map((item) => {
             const href = item.label === "Method" ? homeAnchor("#method") : item.path;
             const active = item.label !== "Method" && pathname === item.activePath;
             return (
-              <Link key={item.label} href={href} onClick={() => handleNavigation(href)}
+              <Link
+                key={item.label}
+                href={href}
+                onClick={() => handleNavigation(href)}
                 aria-current={active ? "page" : undefined}
-                className={active ? "cg4-nav-link is-current" : "cg4-nav-link"}>
+                className={active ? "cg4-nav-link is-current" : "cg4-nav-link"}
+              >
                 {item.label}
               </Link>
             );
@@ -59,23 +62,35 @@ export default function SiteNav() {
           Explore the research <span aria-hidden="true">↗</span>
         </Link>
 
-        <button className={menuOpen ? "cg4-mobile-toggle is-open" : "cg4-mobile-toggle"} type="button"
+        <button
+          className={menuOpen ? "cg4-mobile-toggle is-open" : "cg4-mobile-toggle"}
+          type="button"
           aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
-          aria-expanded={menuOpen} aria-controls="cg4-mobile-links" onClick={() => setMenuOpen((open) => !open)}>
+          aria-expanded={menuOpen}
+          aria-controls="cg4-mobile-links"
+          onClick={() => setMenuOpen((open) => !open)}
+        >
           <span /><span />
         </button>
       </nav>
+
       <div id="cg4-mobile-links" className={menuOpen ? "cg4-mobile-menu is-open" : "cg4-mobile-menu"} aria-hidden={!menuOpen}>
-        {primaryLinks.map((item) => {
-          const href = item.label === "Method" ? homeAnchor("#method") : item.path;
-          const active = item.label !== "Method" && pathname === item.activePath;
-          return (
-            <Link key={item.label} href={href} tabIndex={menuOpen ? 0 : -1}
-              onClick={() => handleNavigation(href)} className={active ? "is-current" : ""}>
-              {item.label}<span aria-hidden="true">↗</span>
-            </Link>
-          );
-        })}
+        <div className="cg4-mobile-menu-inner">
+          {primaryLinks.map((item) => {
+            const href = item.label === "Method" ? homeAnchor("#method") : item.path;
+            const active = item.label !== "Method" && pathname === item.activePath;
+            return (
+              <Link
+                key={item.label}
+                href={href}
+                tabIndex={menuOpen ? 0 : -1}
+                onClick={() => handleNavigation(href)}
+                className={active ? "is-current" : ""}
+              >
+                {item.label}<span aria-hidden="true">↗</span>
+              </Link>
+            );
+          })}
         </div>
       </div>
     </div>
