@@ -334,8 +334,21 @@ export async function POST(request: NextRequest) {
         });
         let text = "";
         if (path === "/robots.txt" && probeResponse.ok) {
-          const rawText = await probeResponse.text();
-          text = rawText.slice(0, 65536);
+          const reader = probeResponse.body?.getReader();
+          if (reader) {
+            const chunks: Uint8Array[] = [];
+            let size = 0;
+            while (size < 65536) {
+              const { done, value } = await reader.read();
+              if (done) break;
+              const chunk = value.subarray(0, Math.max(0, 65536 - size));
+              chunks.push(chunk);
+              size += chunk.length;
+              if (chunk.length < value.length) break;
+            }
+            await reader.cancel().catch(() => undefined);
+            text = new TextDecoder().decode(Buffer.concat(chunks));
+          }
         } else {
           await probeResponse.body?.cancel().catch(() => undefined);
         }
@@ -381,13 +394,6 @@ export async function POST(request: NextRequest) {
           ? "Could not verify robots.txt rules for OAI-SearchBot, PerplexityBot, Claude-SearchBot, Googlebot, and Bingbot. Check the file and any CDN or firewall bot controls."
           : "Checks for a blanket Disallow: / rule applying to common search crawlers. This simplified check does not evaluate every robots.txt precedence rule or test CDN/firewall access.",
       ),
-      check(
-        "Training crawler policy",
-        robotsProbe.ok,
-        robotsProbe.ok
-          ? "Search crawlers and training crawlers serve different purposes. Review GPTBot, ClaudeBot, and Google-Extended separately according to your content policy; blocking training crawlers does not itself block AI search."
-          : "No robots.txt policy could be inspected. Search access and training-data preferences should be evaluated separately.",
-      ),
       check("XML sitemap", sitemapProbe.ok, sitemapProbe.ok ? "sitemap.xml is reachable. Its URLs and freshness were not validated." : "sitemap.xml was not reachable at the standard path; confirm a sitemap exists and is submitted where appropriate."),
       check("llms.txt discovery file", llmsProbe.ok, llmsProbe.ok ? "llms.txt is reachable. This emerging convention is not a confirmed requirement for AI visibility." : "No reachable llms.txt was detected at the standard path. Consider one as optional documentation, not a guaranteed ranking lever."),
     ];
@@ -409,7 +415,7 @@ export async function POST(request: NextRequest) {
       score,
       checks,
       aiReview,
-      note: "AEO readiness snapshot based on homepage HTML and a few standard public files. It does not query AI answer engines, measure brand mentions, validate schema, crawl the whole site, or predict rankings/citations.",
+      note: "AEO readiness snapshot based on homepage HTML and a few standard public files. AI search crawler access checks a simplified robots.txt rule only; CDN/firewall access and all robots.txt precedence rules are not tested. Search crawlers (for retrieval) are distinct from training crawlers such as GPTBot, ClaudeBot, and Google-Extended; set training preferences separately. This scan does not query AI answer engines, measure brand mentions, validate schema, crawl the whole site, or predict rankings/citations.",
     }, { headers: { "Cache-Control": "no-store" } });
   } catch (error) {
     const message = error instanceof Error ? error.message : "The audit could not be completed.";
