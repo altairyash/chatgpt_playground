@@ -332,10 +332,16 @@ export async function POST(request: NextRequest) {
           signal: controller.signal,
           headers: { "user-agent": "SignalAuditBot/1.0 (+public AEO readiness check)" },
         });
-        await probeResponse.body?.cancel().catch(() => undefined);
-        return { ok: probeResponse.ok, status: probeResponse.status };
+        let text = "";
+        if (path === "/robots.txt" && probeResponse.ok) {
+          const rawText = await probeResponse.text();
+          text = rawText.slice(0, 65536);
+        } else {
+          await probeResponse.body?.cancel().catch(() => undefined);
+        }
+        return { ok: probeResponse.ok, status: probeResponse.status, text };
       } catch {
-        return { ok: false, status: 0 };
+        return { ok: false, status: 0, text: "" };
       } finally {
         clearTimeout(timer);
       }
@@ -354,7 +360,34 @@ export async function POST(request: NextRequest) {
       check("Image alternative text", missingAlt === 0, images.length ? (missingAlt ? `${missingAlt} of ${images.length} image tags lack an explicit alt attribute.` : `${images.length} image tags have an alt attribute.`) : "No standard img tags were detected in the returned HTML."),
       check("Document language", hasLang, hasLang ? "The HTML element declares a language." : "The HTML element has no lang attribute in the returned HTML."),
       check("Open Graph metadata", /<meta\b[^>]*property\s*=\s*["']og:title["']/i.test(html) && /<meta\b[^>]*property\s*=\s*["']og:description["']/i.test(html), "Open Graph title and description help platforms interpret and preview the page; this is a supporting signal, not a ranking guarantee."),
-      check("Robots.txt", robotsProbe.ok, robotsProbe.ok ? "robots.txt is reachable. Its directives were not deeply validated." : "robots.txt was not reachable at the standard path; confirm crawler rules are intentionally configured."),
+      check("Robots.txt", robotsProbe.ok, robotsProbe.ok ? "robots.txt is reachable." : "robots.txt was not reachable at the standard path; confirm crawler rules are intentionally configured."),
+      check(
+        "AI search crawler access",
+        robotsProbe.ok && !["OAI-SearchBot", "PerplexityBot", "Claude-SearchBot", "Googlebot", "Bingbot"].some((agent) => {
+          const lines = robotsProbe.text.split(/\r?\n/);
+          let active = false;
+          for (const rawLine of lines) {
+            const line = rawLine.split("#")[0].trim();
+            if (/^user-agent\s*:/i.test(line)) {
+              const name = line.split(":").slice(1).join(":").trim().toLowerCase();
+              active = name === "*" || name === agent.toLowerCase();
+            } else if (active && /^disallow\s*:\s*\/\s*$/i.test(line)) {
+              return true;
+            }
+          }
+          return false;
+        }),
+        !robotsProbe.ok
+          ? "Could not verify robots.txt rules for OAI-SearchBot, PerplexityBot, Claude-SearchBot, Googlebot, and Bingbot. Check the file and any CDN or firewall bot controls."
+          : "Checks for a blanket Disallow: / rule applying to common search crawlers. This simplified check does not evaluate every robots.txt precedence rule or test CDN/firewall access.",
+      ),
+      check(
+        "Training crawler policy",
+        robotsProbe.ok,
+        robotsProbe.ok
+          ? "Search crawlers and training crawlers serve different purposes. Review GPTBot, ClaudeBot, and Google-Extended separately according to your content policy; blocking training crawlers does not itself block AI search."
+          : "No robots.txt policy could be inspected. Search access and training-data preferences should be evaluated separately.",
+      ),
       check("XML sitemap", sitemapProbe.ok, sitemapProbe.ok ? "sitemap.xml is reachable. Its URLs and freshness were not validated." : "sitemap.xml was not reachable at the standard path; confirm a sitemap exists and is submitted where appropriate."),
       check("llms.txt discovery file", llmsProbe.ok, llmsProbe.ok ? "llms.txt is reachable. This emerging convention is not a confirmed requirement for AI visibility." : "No reachable llms.txt was detected at the standard path. Consider one as optional documentation, not a guaranteed ranking lever."),
     ];
