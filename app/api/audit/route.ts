@@ -60,6 +60,49 @@ async function getPublicResponse(raw: string) {
   throw new Error("Too many redirects. Try the final URL shown in your browser.");
 }
 
+function robotsAllowsHomepage(robotsText: string, userAgent: string): boolean {
+  const groups: { agents: string[]; rules: { directive: string; value: string }[] }[] = [];
+  let current: { agents: string[]; rules: { directive: string; value: string }[] } | null = null;
+  let hasRules = false;
+
+  for (const rawLine of robotsText.split(/\r?\n/)) {
+    const line = rawLine.split("#")[0].trim();
+    if (!line) continue;
+    const separator = line.indexOf(":");
+    if (separator < 0) continue;
+    const directive = line.slice(0, separator).trim().toLowerCase();
+    const value = line.slice(separator + 1).trim();
+    if (directive === "user-agent") {
+      if (!current || hasRules) {
+        current = { agents: [], rules: [] };
+        groups.push(current);
+        hasRules = false;
+      }
+      current.agents.push(value.toLowerCase());
+    } else if ((directive === "allow" || directive === "disallow") && current) {
+      current.rules.push({ directive, value });
+      hasRules = true;
+    }
+  }
+
+  const agent = userAgent.toLowerCase();
+  const matching = groups.map((group) => ({
+    group,
+    specificity: Math.max(0, ...group.agents
+      .filter((name) => name === "*" || agent.includes(name))
+      .map((name) => name === "*" ? 0 : name.length)),
+  })).filter((item) => item.group.agents.some((name) => name === "*" || agent.includes(name)));
+  if (!matching.length) return true;
+
+  const specificity = Math.max(...matching.map((item) => item.specificity));
+  const rootRules = matching
+    .filter((item) => item.specificity === specificity)
+    .flatMap((item) => item.group.rules)
+    .filter((rule) => rule.value === "/");
+  if (!rootRules.length) return true;
+  return rootRules.some((rule) => rule.directive === "allow");
+}
+
 function check(label: string, passed: boolean, detail: string): { label: string; status: "pass" | "review"; detail: string } {
   return { label, status: passed ? "pass" : "review", detail };
 }
@@ -332,10 +375,29 @@ export async function POST(request: NextRequest) {
           signal: controller.signal,
           headers: { "user-agent": "SignalAuditBot/1.0 (+public AEO readiness check)" },
         });
-        await probeResponse.body?.cancel().catch(() => undefined);
-        return { ok: probeResponse.ok, status: probeResponse.status };
+        let text = "";
+        if (path === "/robots.txt" && probeResponse.ok) {
+          const reader = probeResponse.body?.getReader();
+          if (reader) {
+            const chunks: Uint8Array[] = [];
+            let size = 0;
+            while (size < 65536) {
+              const { done, value } = await reader.read();
+              if (done) break;
+              const chunk = value.subarray(0, Math.max(0, 65536 - size));
+              chunks.push(chunk);
+              size += chunk.length;
+              if (chunk.length < value.length) break;
+            }
+            await reader.cancel().catch(() => undefined);
+            text = new TextDecoder().decode(Buffer.concat(chunks));
+          }
+        } else {
+          await probeResponse.body?.cancel().catch(() => undefined);
+        }
+        return { ok: probeResponse.ok, status: probeResponse.status, text };
       } catch {
-        return { ok: false, status: 0 };
+        return { ok: false, status: 0, text: "" };
       } finally {
         clearTimeout(timer);
       }
@@ -354,7 +416,15 @@ export async function POST(request: NextRequest) {
       check("Image alternative text", missingAlt === 0, images.length ? (missingAlt ? `${missingAlt} of ${images.length} image tags lack an explicit alt attribute.` : `${images.length} image tags have an alt attribute.`) : "No standard img tags were detected in the returned HTML."),
       check("Document language", hasLang, hasLang ? "The HTML element declares a language." : "The HTML element has no lang attribute in the returned HTML."),
       check("Open Graph metadata", /<meta\b[^>]*property\s*=\s*["']og:title["']/i.test(html) && /<meta\b[^>]*property\s*=\s*["']og:description["']/i.test(html), "Open Graph title and description help platforms interpret and preview the page; this is a supporting signal, not a ranking guarantee."),
-      check("Robots.txt", robotsProbe.ok, robotsProbe.ok ? "robots.txt is reachable. Its directives were not deeply validated." : "robots.txt was not reachable at the standard path; confirm crawler rules are intentionally configured."),
+      check("Robots.txt", robotsProbe.ok, robotsProbe.ok ? "robots.txt is reachable." : "robots.txt was not reachable at the standard path; confirm crawler rules are intentionally configured."),
+      check(
+        "AI search crawler access",
+        robotsProbe.ok && ["OAI-SearchBot", "PerplexityBot", "Claude-SearchBot", "Googlebot", "Bingbot"].every((agent) => robotsAllowsHomepage(robotsProbe.text, agent)),
+
+        !robotsProbe.ok
+          ? "Could not verify robots.txt rules for OAI-SearchBot, PerplexityBot, Claude-SearchBot, Googlebot, and Bingbot. Check the file and any CDN or firewall bot controls."
+          : "Checks for a blanket Disallow: / rule applying to common search crawlers. This simplified check does not evaluate every robots.txt precedence rule or test CDN/firewall access.",
+      ),
       check("XML sitemap", sitemapProbe.ok, sitemapProbe.ok ? "sitemap.xml is reachable. Its URLs and freshness were not validated." : "sitemap.xml was not reachable at the standard path; confirm a sitemap exists and is submitted where appropriate."),
       check("llms.txt discovery file", llmsProbe.ok, llmsProbe.ok ? "llms.txt is reachable. This emerging convention is not a confirmed requirement for AI visibility." : "No reachable llms.txt was detected at the standard path. Consider one as optional documentation, not a guaranteed ranking lever."),
     ];
@@ -376,7 +446,7 @@ export async function POST(request: NextRequest) {
       score,
       checks,
       aiReview,
-      note: "AEO readiness snapshot based on homepage HTML and a few standard public files. It does not query AI answer engines, measure brand mentions, validate schema, crawl the whole site, or predict rankings/citations.",
+      note: "AEO readiness snapshot based on homepage HTML and a few standard public files. AI search crawler access checks a simplified robots.txt rule only; CDN/firewall access and all robots.txt precedence rules are not tested. Search crawlers (for retrieval) are distinct from training crawlers such as GPTBot, ClaudeBot, and Google-Extended; set training preferences separately. This scan does not query AI answer engines, measure brand mentions, validate schema, crawl the whole site, or predict rankings/citations.",
     }, { headers: { "Cache-Control": "no-store" } });
   } catch (error) {
     const message = error instanceof Error ? error.message : "The audit could not be completed.";

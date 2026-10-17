@@ -31,7 +31,8 @@ function suggestedFix(check: Check): string {
     "Image alternative text": "Add concise alt text to informative images; use empty alt text for purely decorative images.",
     "Document language": "Set the HTML lang attribute to the page’s actual language.",
     "Open Graph metadata": "Add accurate Open Graph title and description tags for clear link previews.",
-    "Robots.txt": "Publish intentional crawler rules and make sure they do not block pages you want discovered.",
+    "Robots.txt": "Review crawler-specific rules and confirm they match your discovery and content-use preferences.",
+    "AI search crawler access": "Inspect robots.txt for OAI-SearchBot, PerplexityBot, Claude-SearchBot, Googlebot, and Bingbot. Confirm the intended access policy and separately test CDN/firewall controls; training crawlers are a different policy.",
     "XML sitemap": "Publish an XML sitemap with canonical, indexable URLs and keep it updated.",
     "llms.txt discovery file": "Treat llms.txt as optional documentation. If you use it, keep it short, accurate, and useful.",
   };
@@ -183,7 +184,7 @@ export default function AuditTool() {
             <div className="audit-progress" role="status" aria-live="polite">
               <span className="audit-progress-track" aria-hidden="true"><span /></span>
               <strong>Inspecting your public homepage…</strong>
-              <p>Checking page metadata, indexing signals, Open Graph tags, and discovery files. Personalized recommendations run after the technical scan when AI is configured.</p>
+              <p>Checking page metadata, indexing signals, AI search crawler access, Open Graph tags, and discovery files. Personalized recommendations run after the technical scan when AI is configured.</p>
             </div>
           )}
           {error && <p className="audit-error" role="alert">{error}</p>}
