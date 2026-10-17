@@ -60,6 +60,49 @@ async function getPublicResponse(raw: string) {
   throw new Error("Too many redirects. Try the final URL shown in your browser.");
 }
 
+function robotsAllowsHomepage(robotsText: string, userAgent: string): boolean {
+  const groups: { agents: string[]; rules: { directive: string; value: string }[] }[] = [];
+  let current: { agents: string[]; rules: { directive: string; value: string }[] } | null = null;
+  let hasRules = false;
+
+  for (const rawLine of robotsText.split(/\r?\n/)) {
+    const line = rawLine.split("#")[0].trim();
+    if (!line) continue;
+    const separator = line.indexOf(":");
+    if (separator < 0) continue;
+    const directive = line.slice(0, separator).trim().toLowerCase();
+    const value = line.slice(separator + 1).trim();
+    if (directive === "user-agent") {
+      if (!current || hasRules) {
+        current = { agents: [], rules: [] };
+        groups.push(current);
+        hasRules = false;
+      }
+      current.agents.push(value.toLowerCase());
+    } else if ((directive === "allow" || directive === "disallow") && current) {
+      current.rules.push({ directive, value });
+      hasRules = true;
+    }
+  }
+
+  const agent = userAgent.toLowerCase();
+  const matching = groups.map((group) => ({
+    group,
+    specificity: Math.max(0, ...group.agents
+      .filter((name) => name === "*" || agent.includes(name))
+      .map((name) => name === "*" ? 0 : name.length)),
+  })).filter((item) => item.group.agents.some((name) => name === "*" || agent.includes(name)));
+  if (!matching.length) return true;
+
+  const specificity = Math.max(...matching.map((item) => item.specificity));
+  const rootRules = matching
+    .filter((item) => item.specificity === specificity)
+    .flatMap((item) => item.group.rules)
+    .filter((rule) => rule.value === "/");
+  if (!rootRules.length) return true;
+  return rootRules.some((rule) => rule.directive === "allow");
+}
+
 function check(label: string, passed: boolean, detail: string): { label: string; status: "pass" | "review"; detail: string } {
   return { label, status: passed ? "pass" : "review", detail };
 }
@@ -376,20 +419,8 @@ export async function POST(request: NextRequest) {
       check("Robots.txt", robotsProbe.ok, robotsProbe.ok ? "robots.txt is reachable." : "robots.txt was not reachable at the standard path; confirm crawler rules are intentionally configured."),
       check(
         "AI search crawler access",
-        robotsProbe.ok && !["OAI-SearchBot", "PerplexityBot", "Claude-SearchBot", "Googlebot", "Bingbot"].some((agent) => {
-          const lines = robotsProbe.text.split(/\r?\n/);
-          let active = false;
-          for (const rawLine of lines) {
-            const line = rawLine.split("#")[0].trim();
-            if (/^user-agent\s*:/i.test(line)) {
-              const name = line.split(":").slice(1).join(":").trim().toLowerCase();
-              active = name === "*" || name === agent.toLowerCase();
-            } else if (active && /^disallow\s*:\s*\/\s*$/i.test(line)) {
-              return true;
-            }
-          }
-          return false;
-        }),
+        robotsProbe.ok && ["OAI-SearchBot", "PerplexityBot", "Claude-SearchBot", "Googlebot", "Bingbot"].every((agent) => robotsAllowsHomepage(robotsProbe.text, agent)),
+
         !robotsProbe.ok
           ? "Could not verify robots.txt rules for OAI-SearchBot, PerplexityBot, Claude-SearchBot, Googlebot, and Bingbot. Check the file and any CDN or firewall bot controls."
           : "Checks for a blanket Disallow: / rule applying to common search crawlers. This simplified check does not evaluate every robots.txt precedence rule or test CDN/firewall access.",
