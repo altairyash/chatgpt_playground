@@ -184,7 +184,7 @@ export default function AuditTool() {
             <div className="audit-progress" role="status" aria-live="polite">
               <span className="audit-progress-track" aria-hidden="true"><span /></span>
               <strong>Inspecting your public homepage…</strong>
-              <p>Checking page metadata, indexing signals, Open Graph tags, and discovery files. Personalized recommendations run after the technical scan when AI is configured.</p>
+              <p>Checking page metadata, indexing signals, AI search crawler access, Open Graph tags, and discovery files. Personalized recommendations run after the technical scan when AI is configured.</p>
             </div>
           )}
           {error && <p className="audit-error" role="alert">{error}</p>}
